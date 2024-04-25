@@ -13,7 +13,6 @@ import java.io.*;
  * @author Jordan DeNaro
  * @version 04-21-2024
  */
-
 public class Seminar implements Serializable {
     private String title; // Semianar title
     private String date; // Seminar date
