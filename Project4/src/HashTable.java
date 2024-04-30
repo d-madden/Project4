@@ -7,9 +7,12 @@
  */
 public class HashTable {
     
+    int size;
+    
     // Hash Table constructor 
-    public HashTable() {
+    public HashTable(int hashSize) {
         
+        size = hashSize;
     }
     
     

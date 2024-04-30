@@ -10,9 +10,10 @@ public class Database {
     private MemManager mem;
     private HashTable hash;
     
-    public Database() {
+    public Database(int memSize, int hashSize, String file) {
         
-        //mem = new MemManager();
+        mem = new MemManager(memSize);
+        hash = new HashTable(hashSize);
         
     }
     
@@ -24,9 +25,11 @@ public class Database {
         short y, 
         int cost, 
         String[] keywords, 
-        String description) {
+        String desc) {
         
+        Seminar s = new Seminar(id, title, date, length, x, y, cost, keywords, desc);
         
+        //Handle h = mem.insert(s.serialize(), 0);
         
     }
     

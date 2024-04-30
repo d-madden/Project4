@@ -21,7 +21,7 @@ public class CommandProcessor {
      * object to feed commands to.
      */
     public CommandProcessor() {
-        data = new Database();
+        
     }
     
     /**
@@ -43,6 +43,8 @@ public class CommandProcessor {
         
         File f = null;
         // Attempts to open the file and scan through it
+        data = new Database(memSize, hashSize, file);
+        
         try {
 
             // takes the first command line argument and opens that file
