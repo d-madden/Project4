@@ -29,11 +29,11 @@ public class Database {
         
     }
     
-    public void delete(String id) {
+    public void delete(int id) {
         
     }
     
-    public void search(String id) {
+    public void search(int id) {
         
     }
     

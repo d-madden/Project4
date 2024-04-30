@@ -56,10 +56,11 @@ public class CommandProcessor {
                 if (!line.trim().isEmpty()) {
                     
                     String[] arr = line.trim().split("\\s+");
+                    
                     String command = arr[0];
+                    int id = Integer.parseInt(arr[1]);
                     
                     if (command.equals("insert")) {
-                        
                         
                         String title = scanner.nextLine().trim();
                         
@@ -67,23 +68,28 @@ public class CommandProcessor {
                         
                         String date = dateln[0];
                         int length = Integer.parseInt(dateln[1]);
-                        int x = Integer.parseInt(dateln[2]);
-                        int y = Integer.parseInt(dateln[3]);
+                        short x = Short.parseShort(dateln[2]);
+                        short y = Short.parseShort(dateln[3]);
                         int cost = Integer.parseInt(dateln[4]);
                         
                         String[] keywords = scanner.nextLine().trim().split("\\s+");
                         
                         String desc = scanner.nextLine().trim();
                         
+                        data.insert(id, title, date, length, x, y, cost, keywords, desc);
+                        
                     }
                     else if (command.equals("delete")) {
                         
+                        data.delete(id);
                     }
                     else if (command.equals("search")) {
                         
+                        data.search(id);
                     }
                     else if (command.equals("print")) {
                         
+                        data.print();
                     }
                     else {
                         
