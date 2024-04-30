@@ -32,8 +32,12 @@ public class CommandProcessor {
      * corresponding methods for each command. The methods called 
      * will write to the console.
      * 
-     * @param line
-     *            a single line from the text file
+     * @param memSize
+     *            size of memory
+     * @param hashSize
+     *            size of hash table
+     * @param file
+     *            name of input file
      */
     public void processor(int memSize, int hashSize, String file) {
         
@@ -47,9 +51,6 @@ public class CommandProcessor {
             // creates a scanner object
             Scanner scanner = new Scanner(f);
             
-
-            // creates a command processor object
-            CommandProcessor cmdProc = new CommandProcessor();
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
 
