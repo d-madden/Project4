@@ -46,6 +46,16 @@ public class FreeBlock {
     /**
      * 
      * @return
+     *         returns boolean based on if the freeblock is linked to another
+     */
+    public boolean hasNext() {
+        return (this.next != null);
+    }
+
+
+    /**
+     * 
+     * @return
      *         returns the next freeblock
      */
     public FreeBlock getNext() {

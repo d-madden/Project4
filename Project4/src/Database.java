@@ -25,14 +25,25 @@ public class Database {
         short y, 
         int cost, 
         String[] keywords, 
-        String desc) {
+        String desc) throws Exception {
         
         Seminar s = new Seminar(id, title, date, length, x, y, cost, keywords, desc);
         
-        //Handle h = mem.insert(s.serialize(), 0);
+        if(mem.insert(s.serialize(), 0) == null) {
+            this.resizeMem();
+        }
         
     }
     
+    private void resizeMem() {
+        MemManager memNew = new MemManager(mem.getLength()*2);
+        HashTable hashNew = new HashTable(hash.size);
+        //loop through hashtable and remove from old add to new
+        
+        mem = memNew;
+        hash = hashNew;
+    }
+
     public void delete(int id) {
         
     }
