@@ -46,7 +46,7 @@ public class SemManager {
         int hashSize = Integer.parseInt(args[1]);
         
         CommandProcessor cmd = new CommandProcessor();
-        cmd.process(memSize, hashSize, args[2]);
+        cmd.processor(memSize, hashSize, args[2]);
 
 
         
