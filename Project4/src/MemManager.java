@@ -29,14 +29,18 @@ public class MemManager {
 
 
     Handle insert(byte[] space, int size) {
-
+        
+        return null;
+        
     }
 
     // Return the length of the record associated with theHandle
 
 
     int length(Handle theHandle) {
-
+        
+        return 0;
+        
     }
 
     // Free a block at the position specified by theHandle.
@@ -55,7 +59,8 @@ public class MemManager {
 
 
     int get(byte[] space, Handle theHandle, int size) {
-
+        
+        return 0;
     }
 
     // Dump a printout of the freeblock list

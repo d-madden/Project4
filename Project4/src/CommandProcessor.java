@@ -32,8 +32,12 @@ public class CommandProcessor {
      * corresponding methods for each command. The methods called 
      * will write to the console.
      * 
-     * @param line
-     *            a single line from the text file
+     * @param memSize
+     *            size of memory
+     * @param hashSize
+     *            size of hash table
+     * @param file
+     *            name of input file
      */
     public void processor(int memSize, int hashSize, String file) {
         
@@ -47,19 +51,17 @@ public class CommandProcessor {
             // creates a scanner object
             Scanner scanner = new Scanner(f);
             
-
-            // creates a command processor object
-            CommandProcessor cmdProc = new CommandProcessor();
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
 
                 if (!line.trim().isEmpty()) {
                     
                     String[] arr = line.trim().split("\\s+");
+                    
                     String command = arr[0];
+                    int id = Integer.parseInt(arr[1]);
                     
                     if (command.equals("insert")) {
-                        
                         
                         String title = scanner.nextLine().trim();
                         
@@ -67,23 +69,28 @@ public class CommandProcessor {
                         
                         String date = dateln[0];
                         int length = Integer.parseInt(dateln[1]);
-                        int x = Integer.parseInt(dateln[2]);
-                        int y = Integer.parseInt(dateln[3]);
+                        short x = Short.parseShort(dateln[2]);
+                        short y = Short.parseShort(dateln[3]);
                         int cost = Integer.parseInt(dateln[4]);
                         
                         String[] keywords = scanner.nextLine().trim().split("\\s+");
                         
                         String desc = scanner.nextLine().trim();
                         
+                        data.insert(id, title, date, length, x, y, cost, keywords, desc);
+                        
                     }
                     else if (command.equals("delete")) {
                         
+                        data.delete(id);
                     }
                     else if (command.equals("search")) {
                         
+                        data.search(id);
                     }
                     else if (command.equals("print")) {
                         
+                        data.print();
                     }
                     else {
                         
