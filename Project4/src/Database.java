@@ -8,6 +8,7 @@
 public class Database {
     
     private MemManager mem;
+    private HashTable hash;
     
     public Database() {
         
