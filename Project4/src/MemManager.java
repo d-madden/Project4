@@ -6,6 +6,7 @@
  * @version 04-21-2024
  */
 public class MemManager {
+    
     byte[] mem;
     FreeBlock[] freeBlock;
 
@@ -16,7 +17,8 @@ public class MemManager {
      *            the size given for memory pool
      *            makes an array keeping track of free blocks
      */
-    MemManager(int poolsize) {
+    public MemManager(int poolsize) {
+        
         mem = new byte[poolsize];
         int freeSize = (int)Math.log(poolsize);
         freeBlock = new FreeBlock[freeSize];
