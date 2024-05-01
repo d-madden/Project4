@@ -33,6 +33,10 @@ public class MemManagerTest extends student.TestCase {
         System.out.println(toAdd.length);
 
         Handle returned = mem.insert(toAdd, toAdd.length);
+        for(int i = 0; i < toAdd.length; i ++) {
+            assertEquals(mem.mem[i], toAdd[i]);
+        }
+        
 
     }
 

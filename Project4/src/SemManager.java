@@ -31,8 +31,9 @@ public class SemManager {
     /**
      * @param args
      *     Command line parameters
+     * @throws Exception 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // This is the main file for the program.
         
         //the inital size of the memory manager
