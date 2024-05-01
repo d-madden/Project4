@@ -27,11 +27,19 @@ public class Database {
         String[] keywords, 
         String desc) throws Exception {
         
+        //creates the seminar object serializing it and insering it to memManager
         Seminar s = new Seminar(id, title, date, length, x, y, cost, keywords, desc);
+        byte [] serialized = s.serialize();
+        Handle result = mem.insert(serialized, serialized.length);
         
-        if(mem.insert(s.serialize(), 0) == null) {
+        //if the manager has no room to insert the seminar it will return null
+        //we then know to resize it, repopulate it and then add the seminar
+        if(result == null) {
             this.resizeMem();
+            result = mem.insert(serialized, serialized.length);
         }
+        
+        
         
     }
     
