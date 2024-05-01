@@ -62,4 +62,14 @@ public class FreeBlock {
         return next;
     }
 
+
+    /**
+     * moves the pointer forward
+     */
+    public void movePointer() {
+        FreeBlock temp = this.next.next;
+        this.setNext(temp);
+
+    }
+
 }

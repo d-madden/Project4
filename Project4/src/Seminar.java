@@ -32,21 +32,39 @@ public class Seminar implements Serializable {
         // Nothing here
     }
 
+
     /**
      * Create a new Seminar object from the field data
      *
-     * @param tin    input title
-     * @param datein input date
-     * @param lin    input length
-     * @param kin    input keywords
-     * @param xin    input x coord
-     * @param yin    input y coord
-     * @param descin input description
-     * @param cin    input cost
-     * @param idin   input ID
+     * @param tin
+     *            input title
+     * @param datein
+     *            input date
+     * @param lin
+     *            input length
+     * @param kin
+     *            input keywords
+     * @param xin
+     *            input x coord
+     * @param yin
+     *            input y coord
+     * @param descin
+     *            input description
+     * @param cin
+     *            input cost
+     * @param idin
+     *            input ID
      */
-    public Seminar(int idin, String tin, String datein, int lin, short xin,
-        short yin, int cin, String[] kin, String descin) {
+    public Seminar(
+        int idin,
+        String tin,
+        String datein,
+        int lin,
+        short xin,
+        short yin,
+        int cin,
+        String[] kin,
+        String descin) {
         id = idin;
         title = tin;
         date = datein;
@@ -60,12 +78,15 @@ public class Seminar implements Serializable {
 
     // ----------------------------------------------------------
 
+
     /**
      * Return a Seminar object made by deserializing a byte array
      *
-     * @param inputbytes A serialized Seminar object stored in a byte array
+     * @param inputbytes
+     *            A serialized Seminar object stored in a byte array
      * @return the deserialized Seminar
-     * @throws Exception from byte stream
+     * @throws Exception
+     *             from byte stream
      */
 
     public static Seminar deserialize(byte[] inputbytes) throws Exception {
@@ -92,13 +113,15 @@ public class Seminar implements Serializable {
         }
     }
 
+
     // ----------------------------------------------------------
     /**
      * Return the cannonical serialized form (as a byte array) for this seminar
      * object
      *
      * @return the byte array that is the serialization of this
-     * @throws Exception from serialization
+     * @throws Exception
+     *             from serialization
      */
 
     public byte[] serialize() throws Exception {
@@ -123,6 +146,7 @@ public class Seminar implements Serializable {
         return out.toByteArray();
     }
 
+
     /**
      * @return a string representation of the object.
      */
@@ -134,8 +158,18 @@ public class Seminar implements Serializable {
             if (i != keywords.length - 1)
                 mykeys += ", ";
         }
-        return "ID: " + id + ", Title: " + title + "\nDate: " + date +
-            ", Length: " + length + ", X: " + x + ", Y: " + y + ", Cost: " +
-            cost + "\nDescription: " + desc + "\nKeywords: " + mykeys;
+        return "ID: " + id + ", Title: " + title + "\nDate: " + date
+            + ", Length: " + length + ", X: " + x + ", Y: " + y + ", Cost: "
+            + cost + "\nDescription: " + desc + "\nKeywords: " + mykeys;
+    }
+
+
+    /**
+     * 
+     * @return
+     *         returns the int ID of the seminar object
+     */
+    public int getID() {
+        return id;
     }
 }

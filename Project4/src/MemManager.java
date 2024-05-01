@@ -20,12 +20,16 @@ public class MemManager {
     public MemManager(int poolsize) {
 
         mem = new byte[poolsize];
-        int freeSize = (int)Math.log(poolsize);
+        int freeSize = log(poolsize);
         freeBlock = new FreeBlock[freeSize];
-        for (int i = 0; i < freeSize; i++) {
-            freeBlock[i] = new FreeBlock((int)Math.pow(2, i + 1));
+        int begIndex = 0;
+        freeBlock[0] = new FreeBlock(begIndex);
+        for (int i = 1; i < freeSize; i++) {
+            begIndex += (int)Math.pow(2, i);
+            freeBlock[i] = new FreeBlock(begIndex);
         }
         freeBlock[freeSize - 1].setNext(new FreeBlock(0));
+
     }
 
     // Insert a record and return its position handle.
@@ -33,7 +37,7 @@ public class MemManager {
     // space contains the record to be inserted, of length size.
 
 
-    Handle insert(byte[] space, int size) {
+    Handle insert(byte[] space, int size) throws Exception {
 
         // returns where in the array we have space for this data
         int block = space(size);
@@ -41,7 +45,19 @@ public class MemManager {
             return null;
         }
 
-        return null;
+        int givenBlockSize = (int)Math.pow(2, block);
+
+        while (size <= givenBlockSize / 2) {
+            splitBlock(block);
+            return (insert(space, size));
+        }
+
+        int startIndex = freeBlock[block].getBegIndex();
+        System.arraycopy(space, 0, freeBlock, startIndex, size);
+        freeBlock[block].movePointer();
+
+        return (new Handle(Seminar.deserialize(space).getID(), startIndex,
+            size));
 
     }
 
@@ -57,6 +73,21 @@ public class MemManager {
 
 
     /**
+     * splits the block into 2
+     * 
+     * @param block
+     *            takes in the block we are trying to split
+     */
+    public void splitBlock(int block) {
+        int currSize = freeBlock[block].getNext().getBegIndex();
+        freeBlock[block].setNext(null);
+        freeBlock[block - 1].setNext(new FreeBlock(currSize / 2));
+        freeBlock[block - 1].getNext().setNext(new FreeBlock(currSize / 2));
+
+    }
+
+
+    /**
      * 
      * @param size
      *            size of record to be added
@@ -65,7 +96,7 @@ public class MemManager {
      */
     private int space(int size) {
         // gets the smallest block that could store it
-        int start = (int)Math.log(size);
+        int start = log(size);
 
         // loops from there forward seeing if there is space
         for (int i = start; i < this.freeBlock.length; i++) {
@@ -74,17 +105,23 @@ public class MemManager {
             }
         }
         // runs resize if no fit is found
-        this.resize();
-        return (this.space(size));
+        return (-1);
     }
 
 
     /**
-     * resizes the memory block if it is not large enough
+     * 
+     * @param size
+     *            takes in the size of a block
+     * @return
+     *         returns the log base 2 of it
      */
-    private MemManager resize() {
-        MemManager revised = new MemManager(mem.length * 2);
-
+    private int log(int size) {
+        int i = 0;
+        while (Math.pow(2, i) <= size) {
+            i++;
+        }
+        return i;
     }
 
 
