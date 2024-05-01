@@ -21,14 +21,11 @@ public class MemManager {
 
         mem = new byte[poolsize];
         int freeSize = log(poolsize);
-        freeBlock = new FreeBlock[freeSize];
-        int begIndex = 0;
-        freeBlock[0] = new FreeBlock(begIndex);
-        for (int i = 1; i < freeSize; i++) {
-            begIndex += (int)Math.pow(2, i);
-            freeBlock[i] = new FreeBlock(begIndex);
+        freeBlock = new FreeBlock[freeSize - 1];
+        for (int i = 0; i < freeSize - 1; i++) {
+            freeBlock[i] = new FreeBlock((int)Math.pow(2, i + 1));
         }
-        freeBlock[freeSize - 1].setNext(new FreeBlock(0));
+        freeBlock[freeSize - 2].setNext(new FreeBlock(0));
 
     }
 
@@ -45,15 +42,15 @@ public class MemManager {
             return null;
         }
 
-        int givenBlockSize = (int)Math.pow(2, block);
+        int givenBlockSize = (int)Math.pow(2, block + 1);
 
         while (size <= givenBlockSize / 2) {
             splitBlock(block);
             return (insert(space, size));
         }
 
-        int startIndex = freeBlock[block].getBegIndex();
-        System.arraycopy(space, 0, freeBlock, startIndex, size);
+        int startIndex = freeBlock[block].getNext().getBegIndex();
+        System.arraycopy(space, 0, mem, startIndex, size);
         freeBlock[block].movePointer();
 
         return (new Handle(Seminar.deserialize(space).getID(), startIndex,
@@ -67,7 +64,7 @@ public class MemManager {
      * @return
      *         returns current length of mem manager
      */
-    public int getLength() {
+    public int getMemLength() {
         return (this.mem.length);
     }
 
@@ -78,11 +75,13 @@ public class MemManager {
      * @param block
      *            takes in the block we are trying to split
      */
-    public void splitBlock(int block) {
-        int currSize = freeBlock[block].getNext().getBegIndex();
+    private void splitBlock(int block) {
+        int begIndex = freeBlock[block].getNext().getBegIndex();
+        int currSize = freeBlock[block].getBegIndex();
         freeBlock[block].setNext(null);
-        freeBlock[block - 1].setNext(new FreeBlock(currSize / 2));
-        freeBlock[block - 1].getNext().setNext(new FreeBlock(currSize / 2));
+        freeBlock[block - 1].setNext(new FreeBlock(begIndex));
+        freeBlock[block - 1].getNext().setNext(new FreeBlock(begIndex + currSize
+            / 2));
 
     }
 
@@ -96,7 +95,7 @@ public class MemManager {
      */
     private int space(int size) {
         // gets the smallest block that could store it
-        int start = log(size);
+        int start = log(size) - 1;
 
         // loops from there forward seeing if there is space
         for (int i = start; i < this.freeBlock.length; i++) {

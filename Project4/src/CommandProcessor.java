@@ -38,8 +38,9 @@ public class CommandProcessor {
      *            size of hash table
      * @param file
      *            name of input file
+     * @throws Exception 
      */
-    public void processor(int memSize, int hashSize, String file) {
+    public void processor(int memSize, int hashSize, String file) throws Exception {
         
         File f = null;
         // Attempts to open the file and scan through it

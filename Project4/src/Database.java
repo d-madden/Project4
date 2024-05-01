@@ -44,7 +44,7 @@ public class Database {
     }
     
     private void resizeMem() {
-        MemManager memNew = new MemManager(mem.getLength()*2);
+        MemManager memNew = new MemManager(mem.getMemLength()*2);
         HashTable hashNew = new HashTable(hash.size);
         //loop through hashtable and remove from old add to new
         
