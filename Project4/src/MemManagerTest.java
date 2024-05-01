@@ -37,6 +37,9 @@ public class MemManagerTest extends student.TestCase {
             assertEquals(mem.mem[i], toAdd[i]);
         }
         
+        byte[] hold = new byte[100];
+        int size = mem.get(hold, returned);
+        assertEquals(size, toAdd.length);
 
     }
 

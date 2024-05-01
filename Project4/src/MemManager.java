@@ -34,6 +34,16 @@ public class MemManager {
     // space contains the record to be inserted, of length size.
 
 
+    /**
+     * 
+     * @param space
+     *            byte array of the serialized seminar
+     * @param size
+     *            size of the serialized seminar
+     * @return
+     *         returns a handle receipt of the stored memory
+     * @throws Exception
+     */
     Handle insert(byte[] space, int size) throws Exception {
 
         // returns where in the array we have space for this data
@@ -152,9 +162,24 @@ public class MemManager {
     // Return the number of bytes actually copied into space.
 
 
-    int get(byte[] space, Handle theHandle, int size) {
+    /**
+     * 
+     * @param space
+     *            the space we are copying the data into
+     * @param theHandle
+     *            the handle directing where the data is coming from
+     * 
+     * @return
+     *         returns the amount of bytes pulled
+     */
+    int get(byte[] space, Handle theHandle) {
 
-        return 0;
+        int handSize = theHandle.getLength();
+        int handStart = theHandle.getStart();
+
+        System.arraycopy(mem, handStart, space, 0, handSize);
+
+        return handSize;
     }
 
     // Dump a printout of the freeblock list
