@@ -92,7 +92,6 @@ public class MemManager {
         freeBlock[block - 1].setNext(new FreeBlock(begIndex));
         freeBlock[block - 1].getNext().setNext(new FreeBlock(begIndex + currSize
             / 2));
-        
 
     }
 
@@ -191,7 +190,7 @@ public class MemManager {
             int min = Math.min(handStart, freeBlock[block].getNext()
                 .getBegIndex());
             freeBlock[block].setNext(null);
-            compress(block + 1, min);           
+            compress(block + 1, min);
         }
 
     }
@@ -225,7 +224,22 @@ public class MemManager {
     // Dump a printout of the freeblock list
 
 
+    /**
+     * prints out all the freeBlocks and their start indicies
+     */
     void dump() {
 
+        System.out.println("Freeblock List:");
+        for (int i = 0; i < freeBlock.length; i++) {
+            if (freeBlock[i].getNext() != null) {
+                System.out.print(freeBlock[i].getBegIndex() + ": ");
+                FreeBlock curr = freeBlock[i].getNext();
+                while (curr != null) {
+                    System.out.print(curr.getBegIndex());
+                    curr = curr.getNext();
+                }
+                System.out.println();
+            }
+        }
     }
 }
