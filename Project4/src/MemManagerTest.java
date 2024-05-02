@@ -21,14 +21,14 @@ public class MemManagerTest extends student.TestCase {
      * @throws Exception
      * 
      */
-    public void testInsert() throws Exception {
-        String[] keywords = { "Good", "Bad", "Ugly" };
+    public void testInsert() throws Exception { 
+        String[] keywords = { "Good" };
         String expected = "ID: 1729, Title: Seminar Title\n"
             + "Date: 2405231000, Length: 75, X: 15, Y: 33, Cost: 125\n"
             + "Description: This is a great seminar\n"
             + "Keywords: Good, Bad, Ugly";
-        Seminar mysem = new Seminar(1729, "Seminar Title", "2405231000", 75,
-            (short)15, (short)33, 125, keywords, "This is a great seminar");
+        Seminar mysem = new Seminar(1729, "Seminar", "2405231000", 75,
+            (short)15, (short)33, 125, keywords, "This");
         byte[] toAdd = mysem.serialize();
         System.out.println(toAdd.length);
 
@@ -40,6 +40,7 @@ public class MemManagerTest extends student.TestCase {
         byte[] hold = new byte[100];
         int size = mem.get(hold, returned);
         assertEquals(size, toAdd.length);
+        mem.remove(returned);
 
     }
 

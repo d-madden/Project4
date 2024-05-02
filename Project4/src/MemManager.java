@@ -88,10 +88,11 @@ public class MemManager {
     private void splitBlock(int block) {
         int begIndex = freeBlock[block].getNext().getBegIndex();
         int currSize = freeBlock[block].getBegIndex();
-        freeBlock[block].setNext(null);
+        freeBlock[block].setNext(freeBlock[block].getNext().getNext());
         freeBlock[block - 1].setNext(new FreeBlock(begIndex));
         freeBlock[block - 1].getNext().setNext(new FreeBlock(begIndex + currSize
             / 2));
+        
 
     }
 
@@ -153,6 +154,45 @@ public class MemManager {
 
 
     void remove(Handle theHandle) {
+        int handSize = theHandle.getLength();
+        int handStart = theHandle.getStart();
+
+        // frees up all the memory previosuly used
+        for (int i = handStart; i < handSize; i++) {
+            mem[i] = 0;
+        }
+
+        int block = log(handSize) - 1;
+
+        if (freeBlock[block].getNext() == null) {
+            freeBlock[block].setNext(new FreeBlock(handStart));
+        }
+        else {
+            compress(block, handStart);
+        }
+
+    }
+
+
+    /**
+     * 
+     * @param block
+     *            takes in the block we are compressing from
+     * @param handStart
+     *            the start position of the block
+     */
+    private void compress(int block, int handStart) {
+
+        if (freeBlock[block + 1].getNext() == null) {
+            freeBlock[block + 1].setNext(new FreeBlock(handStart));
+            freeBlock[block].setNext(null);
+        }
+        else {
+            int min = Math.min(handStart, freeBlock[block].getNext()
+                .getBegIndex());
+            freeBlock[block].setNext(null);
+            compress(block + 1, min);           
+        }
 
     }
 
