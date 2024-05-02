@@ -10,7 +10,7 @@ public class Database {
     private MemManager mem;
     private HashTable hash;
     
-    public Database(int memSize, int hashSize, String file) {
+    public Database(int memSize, int hashSize) {
         
         mem = new MemManager(memSize);
         hash = new HashTable(hashSize);
