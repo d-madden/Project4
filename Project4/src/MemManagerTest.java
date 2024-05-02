@@ -38,9 +38,19 @@ public class MemManagerTest extends student.TestCase {
         }
         
         byte[] hold = new byte[100];
+        
         int size = mem.get(hold, returned);
         assertEquals(size, toAdd.length);
+        
+        byte[] small = new byte[2];
+        small[0] = toAdd[22];
+        small[1] = toAdd[20];
+        Handle smallH = mem.insert(small, small.length);
+        
+        mem.dump();
+
         mem.remove(returned);
+        mem.remove(smallH);
 
     }
 

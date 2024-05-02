@@ -20,7 +20,7 @@ public class MemManager {
     public MemManager(int poolsize) {
 
         mem = new byte[poolsize];
-        int freeSize = log(poolsize);
+        int freeSize = log(poolsize) + 1;
         freeBlock = new FreeBlock[freeSize - 1];
         for (int i = 0; i < freeSize - 1; i++) {
             freeBlock[i] = new FreeBlock((int)Math.pow(2, i + 1));
@@ -63,7 +63,7 @@ public class MemManager {
         System.arraycopy(space, 0, mem, startIndex, size);
         freeBlock[block].movePointer();
 
-        return (new Handle(Seminar.deserialize(space).getID(), startIndex,
+        return (new Handle(3, startIndex,
             size));
 
     }
@@ -127,7 +127,7 @@ public class MemManager {
      */
     private int log(int size) {
         int i = 0;
-        while (Math.pow(2, i) <= size) {
+        while (Math.pow(2, i) < size) {
             i++;
         }
         return i;
