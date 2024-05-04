@@ -87,10 +87,12 @@ public class HashTable {
      * @param e
      * @return
      */
-    public boolean hashDelete(int id) {
+    public Handle hashDelete(int id) {
 
         int home; // Home position for K
         int pos = home = id % size; // Initial position is the home slot
+        Handle removed = EMPTYHANDLE;
+        
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != EMPTYHANDLE); i++) {
 
@@ -99,14 +101,14 @@ public class HashTable {
         }
         if (id == (hash[pos]).getId()) { // Found it
             
-            
+            removed = hash[pos];
             hash[pos] = EMPTYHANDLE;
             elements--;
 
-            return true;
+            return removed;
         }
         else {
-            return false; // K not in hash table
+            return EMPTYHANDLE; // K not in hash table
         }
     }
 
@@ -115,6 +117,20 @@ public class HashTable {
      * dumps hashTable
      */
     public void dump() {
+        
+        System.out.println("Hashtable: ");
+        
+        for (int i = 0; i < size; i++) {
+            
+            if (hash[i].getId() != -1) {
+                
+                System.out.println(i + ": " + hash[i].getId());
+                
+            }
+            
+        }
+        
+        System.out.println("total records: " + elements);
 
     }
 
