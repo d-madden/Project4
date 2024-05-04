@@ -85,7 +85,7 @@ public class HashTable {
     /**
      * 
      * @param e
-     * @return
+     * @return removed handle
      */
     public Handle hashDelete(int id) {
 
