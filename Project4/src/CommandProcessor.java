@@ -97,8 +97,15 @@ public class CommandProcessor {
                         data.search(id);
                     }
                     else if (command.equals("print")) {
+                        
+                        if(arr[1] == "hashtable") {
+                            data.printH();
+                        }
+                        else {
+                            data.printF();
+                        }
 
-                        data.print();
+                        
                     }
                     else {
 
