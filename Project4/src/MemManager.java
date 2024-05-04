@@ -44,7 +44,7 @@ public class MemManager {
      *         returns a handle receipt of the stored memory
      * @throws Exception
      */
-    Handle insert(byte[] space, int size) throws Exception {
+    Handle insert(byte[] space, int size, int id) throws Exception {
 
         // returns where in the array we have space for this data
         int block = space(size);
@@ -56,15 +56,14 @@ public class MemManager {
 
         while (size <= givenBlockSize / 2) {
             splitBlock(block);
-            return (insert(space, size));
+            return (insert(space, size, id));
         }
 
         int startIndex = freeBlock[block].getNext().getBegIndex();
         System.arraycopy(space, 0, mem, startIndex, size);
         freeBlock[block].movePointer();
 
-        return (new Handle(3, startIndex,
-            size));
+        return (new Handle(id, startIndex, size));
 
     }
 
@@ -236,7 +235,7 @@ public class MemManager {
                 FreeBlock curr = freeBlock[i];
                 while (curr.hasNext()) {
                     curr = curr.getNext();
-                    System.out.print(curr.getBegIndex());                  
+                    System.out.print(curr.getBegIndex());
                 }
                 System.out.println();
             }

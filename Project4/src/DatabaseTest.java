@@ -21,7 +21,7 @@ public class DatabaseTest extends student.TestCase {
 
         String[] shortKeywords = { "hello, Time, ONE" };
 
-        data.insert(1729, "Seminar", "2405231000", 75, (short)15, (short)33,
+        data.insert(10, "Seminar", "2405231000", 75, (short)15, (short)33,
             125, shortKeywords, "This");
 
         data.insert(1729, "Seminar", "2405231000", 75, (short)15, (short)33,

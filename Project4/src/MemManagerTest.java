@@ -45,7 +45,7 @@ public class MemManagerTest extends student.TestCase {
 
         System.out.println(toAdd.length);
 
-        Handle returned = mem.insert(toAdd, toAdd.length);
+        Handle returned = mem.insert(toAdd, toAdd.length, 1729);
 
         assertFalse(mem.freeBlock[mem.freeBlock.length - 1].hasNext());
 
@@ -69,7 +69,7 @@ public class MemManagerTest extends student.TestCase {
         byte[] small = new byte[2];
         small[0] = toAdd[22];
         small[1] = toAdd[20];
-        Handle smallH = mem.insert(small, small.length);
+        Handle smallH = mem.insert(small, small.length, 0);
 
         ByteArrayOutputStream outContent1 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent1));
@@ -91,7 +91,7 @@ public class MemManagerTest extends student.TestCase {
         Seminar longMysem = new Seminar(1729, "Seminar", "2405231000", 75,
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();
-        Handle tooLong = mem.insert(tLong, tLong.length);
+        Handle tooLong = mem.insert(tLong, tLong.length, 1729);
 
         assertEquals(tooLong, null);
 

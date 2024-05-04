@@ -35,13 +35,13 @@ public class Database {
         Seminar s = new Seminar(id, title, date, length, x, y, cost, keywords,
             desc);
         byte[] serialized = s.serialize();
-        Handle result = mem.insert(serialized, serialized.length);
+        Handle result = mem.insert(serialized, serialized.length, id);
 
         // if the manager has no room to insert the seminar it will return null
         // we then know to resize it, repopulate it and then add the seminar
-        if (result == null) {
+        while (result == null) {
             this.resizeMem();
-            result = mem.insert(serialized, serialized.length);
+            result = mem.insert(serialized, serialized.length, id);
         }
 
         hash.hashInsert(result);
@@ -69,7 +69,7 @@ public class Database {
             if (temp.getId() != -1) {
                 tempArr = new byte[temp.getLength()];
                 mem.get(tempArr, temp);
-                temp = memNew.insert(tempArr, tempArr.length);
+                temp = memNew.insert(tempArr, tempArr.length, temp.getId());
                 hashNew.hashInsert(temp);
             }
         }
