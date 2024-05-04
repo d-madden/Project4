@@ -1,5 +1,5 @@
 /**
- * Comment...
+ * memory manager class
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro
@@ -151,6 +151,12 @@ public class MemManager {
     // Merge adjacent free blocks.
 
 
+    /**
+     * removes the handle from the memory manager
+     * 
+     * @param theHandle
+     *            takes in a handle to remove
+     */
     void remove(Handle theHandle) {
         int handSize = theHandle.getLength();
         int handStart = theHandle.getStart();

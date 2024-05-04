@@ -1,5 +1,4 @@
 /**
- * Comment...
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro

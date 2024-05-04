@@ -4,8 +4,6 @@ import student.TestCase;
 /**
  * Test the Seminar class
  *
- * @author CS3114/CS5040 staff
- * @version mm/dd/yyyy
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro

@@ -2,7 +2,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
- * Comment...
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro
@@ -21,7 +20,10 @@ public class MemManagerTest extends student.TestCase {
 
 
     /**
+     * tests the insert method of memory manager
+     * 
      * @throws Exception
+     * 
      * 
      */
     public void testInsert() throws Exception {
