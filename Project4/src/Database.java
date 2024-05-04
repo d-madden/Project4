@@ -30,10 +30,16 @@ public class Database {
         String desc)
         throws Exception {
 
+        // resizes hash if half full
+        if (hash.isFull()) {
+            this.resizeHash();
+        }
+
         // creates the seminar object serializing it and insering it to
         // memManager
         Seminar s = new Seminar(id, title, date, length, x, y, cost, keywords,
             desc);
+
         byte[] serialized = s.serialize();
         Handle result = mem.insert(serialized, serialized.length, id);
 
@@ -45,6 +51,24 @@ public class Database {
         }
 
         hash.hashInsert(result);
+
+    }
+
+
+    /**
+     * resizes hash table
+     */
+    private void resizeHash() {
+        HashTable hashnew = new HashTable(hash.getSize() * 2);
+
+        Handle[] table = hash.getTable();
+        Handle temp;
+        for (int i = 0; i < hash.getSize(); i++) {
+            temp = table[i];
+            if (temp.getId() != -1) {
+                hashnew.hashInsert(temp);
+            }
+        }
 
     }
 
@@ -80,6 +104,18 @@ public class Database {
 
 
     public void delete(int id) {
+        Handle temp = hash.hashDelete(id);
+
+        // if the id is not in the hash
+        if (temp == null) {
+            System.out.print("Delete FAILED -- There is no record with ID "
+                + id);
+        }
+        else {
+            mem.remove(temp);
+            System.out.print("Record with ID " + id
+                + " successfully deleted from the database");
+        }
 
     }
 

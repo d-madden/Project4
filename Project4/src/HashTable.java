@@ -14,8 +14,8 @@ public class HashTable {
     // The key difference from what OpenDSA describes
     // is that your hash tables must be extensible.
 
-    private int size;      // size of array
-    private int elements;  // number of handles
+    private int size; // size of array
+    private int elements; // number of handles
     private Handle[] hash;
     private static Handle EMPTYHANDLE;
 
@@ -25,9 +25,9 @@ public class HashTable {
         size = hashSize;
         hash = new Handle[size];
         EMPTYHANDLE = new Handle(-1, 0, 0);
-        
-        //populates the array with tombstones
-        for(int i = 0; i < size; i++) {
+
+        // populates the array with tombstones
+        for (int i = 0; i < size; i++) {
             hash[i] = EMPTYHANDLE;
         }
     }
@@ -52,6 +52,7 @@ public class HashTable {
 
     }
 
+
     /**
      * 
      * @param e
@@ -65,20 +66,21 @@ public class HashTable {
         int pos = home = id % size; // Initial position is the home slot
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != EMPTYHANDLE); i++) {
-            
+
             pos = (home + p(id, i)) % size; // Next on probe
-                                                             // sequence
+                                            // sequence
         }
         if (id == (hash[pos]).getId()) { // Found it
 
             e = hash[pos];
-            
+
             return true;
         }
         else {
             return false; // K not in hash table
         }
     }
+
 
     /**
      * 
@@ -93,9 +95,9 @@ public class HashTable {
         int pos = home = id % size; // Initial position is the home slot
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != EMPTYHANDLE); i++) {
-            
+
             pos = (home + p(id, i)) % size; // Next on probe
-                                                             // sequence
+                                            // sequence
         }
         if (id == (hash[pos]).getId()) { // Found it
 
@@ -108,13 +110,15 @@ public class HashTable {
             return false; // K not in hash table
         }
     }
-    
+
+
     /**
      * dumps hashTable
      */
     public void dump() {
-        
+
     }
+
 
     /**
      * gets size of hashTable
@@ -122,33 +126,47 @@ public class HashTable {
      * @return size
      */
     public int getSize() {
-        
+
         return size;
     }
-    
+
+
     /**
      * gets hashTable array
      * 
      * @return hash
      */
     public Handle[] getTable() {
-        
+
         return hash;
     }
-    
+
+
     /**
      * gets number of elements in hashTable
      * 
      * @return elements
      */
     public int getElements() {
-        
+
         return elements;
     }
-    
+
+
     private int p(int K, int i) {
-        
+
         return i * ((((K / size) % (size / 2)) * 2) + 1);
+    }
+
+
+    /**
+     * 
+     * @return
+     *         true if its half full
+     */
+    public boolean isFull() {
+        return (elements > size / 2);
+
     }
 
 }
