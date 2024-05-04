@@ -52,7 +52,7 @@ public class MemManager {
             return null;
         }
 
-        int givenBlockSize = (int)Math.pow(2, block + 1);
+        int givenBlockSize = freeBlock[block].getBegIndex();
 
         while (size <= givenBlockSize / 2) {
             splitBlock(block);
@@ -231,12 +231,12 @@ public class MemManager {
 
         System.out.println("Freeblock List:");
         for (int i = 0; i < freeBlock.length; i++) {
-            if (freeBlock[i].getNext() != null) {
+            if (freeBlock[i].hasNext()) {
                 System.out.print(freeBlock[i].getBegIndex() + ": ");
-                FreeBlock curr = freeBlock[i].getNext();
-                while (curr != null) {
-                    System.out.print(curr.getBegIndex());
+                FreeBlock curr = freeBlock[i];
+                while (curr.hasNext()) {
                     curr = curr.getNext();
+                    System.out.print(curr.getBegIndex());                  
                 }
                 System.out.println();
             }

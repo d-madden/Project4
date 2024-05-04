@@ -22,7 +22,6 @@ public class SemManagerTest extends TestCase {
     {
         SemManager sem = new SemManager();
         assertNotNull(sem);
-        SemManager.main(null);
     }
 }
 

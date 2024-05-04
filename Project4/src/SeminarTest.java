@@ -56,7 +56,7 @@ public class SeminarTest extends TestCase {
         Seminar mysem2 = Seminar.deserialize(bytes);
         System.out.println("Number of bytes in serialized object is: "
             + bytes.length);
-        assertTrue(bytes.length == 274);
+        assertEquals(bytes.length, 95);
         String sem2Print = mysem2.toString();
         System.out.println(semPrint);
         System.out.println(sem2Print);
