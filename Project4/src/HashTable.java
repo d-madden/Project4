@@ -103,6 +103,13 @@ public class HashTable {
             return false; // K not in hash table
         }
     }
+    
+    /**
+     * dumps hashTable
+     */
+    public void dump() {
+        
+    }
 
     /**
      * gets size of hashTable
