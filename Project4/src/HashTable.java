@@ -25,6 +25,11 @@ public class HashTable {
         size = hashSize;
         hash = new Handle[size];
         EMPTYHANDLE = new Handle(-1, 0, 0);
+        
+        //populates the array with tombstones
+        for(int i = 0; i < size; i++) {
+            hash[i] = EMPTYHANDLE;
+        }
     }
 
 

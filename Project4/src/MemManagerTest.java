@@ -34,7 +34,8 @@ public class MemManagerTest extends student.TestCase {
             num *= 2;
 
         }
-        assertEquals(mem.freeBlock[mem.freeBlock.length -1].getNext().getBegIndex(), 0);
+        assertEquals(mem.freeBlock[mem.freeBlock.length - 1].getNext()
+            .getBegIndex(), 0);
 
         String[] keywords = { "Good" };
         Seminar mysem = new Seminar(1729, "Seminar", "2405231000", 75,
@@ -45,16 +46,16 @@ public class MemManagerTest extends student.TestCase {
         System.out.println(toAdd.length);
 
         Handle returned = mem.insert(toAdd, toAdd.length);
-        
+
         assertFalse(mem.freeBlock[mem.freeBlock.length - 1].hasNext());
-        
+
         assertTrue(mem.freeBlock[mem.freeBlock.length - 2].hasNext());
-        assertEquals(mem.freeBlock[mem.freeBlock.length - 2].getNext().getBegIndex(), 128);
-        
+        assertEquals(mem.freeBlock[mem.freeBlock.length - 2].getNext()
+            .getBegIndex(), 128);
+
         assertTrue(mem.freeBlock[mem.freeBlock.length - 3].hasNext());
-        assertEquals(mem.freeBlock[mem.freeBlock.length - 3].getNext().getBegIndex(), 64);
-        
-        
+        assertEquals(mem.freeBlock[mem.freeBlock.length - 3].getNext()
+            .getBegIndex(), 64);
 
         for (int i = 0; i < toAdd.length; i++) {
             assertEquals(mem.mem[i], toAdd[i]);
@@ -69,7 +70,6 @@ public class MemManagerTest extends student.TestCase {
         small[0] = toAdd[22];
         small[1] = toAdd[20];
         Handle smallH = mem.insert(small, small.length);
-        
 
         ByteArrayOutputStream outContent1 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent1));
@@ -82,8 +82,6 @@ public class MemManagerTest extends student.TestCase {
         assertTrue(output1.contains("16: 80"));
         assertTrue(output1.contains("32: 96"));
         assertTrue(output1.contains("128: 128"));
-        
-        
 
         mem.remove(returned);
         mem.remove(smallH);
@@ -94,7 +92,12 @@ public class MemManagerTest extends student.TestCase {
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();
         Handle tooLong = mem.insert(tLong, tLong.length);
+
         assertEquals(tooLong, null);
+
+        Database test = new Database(256, 12);
+        test.insert(1729, "Seminar", "2405231000", 75, (short)15, (short)33,
+            125, longKeywords, "This");
 
     }
 

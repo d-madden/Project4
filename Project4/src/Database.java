@@ -44,12 +44,15 @@ public class Database {
             result = mem.insert(serialized, serialized.length);
         }
 
+        hash.hashInsert(result);
+
     }
 
 
     /**
      * resizes the memManager when it cant hold a record
-     * @throws Exception 
+     * 
+     * @throws Exception
      */
     private void resizeMem() throws Exception {
         MemManager memNew = new MemManager(mem.getMemLength() * 2);

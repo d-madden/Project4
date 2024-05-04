@@ -15,6 +15,21 @@ public class DatabaseTest extends student.TestCase {
     }
 
 
+    public void testResize() throws Exception {
+        String[] longKeywords = {
+            "Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good" };
+
+        String[] shortKeywords = { "hello, Time, ONE" };
+
+        data.insert(1729, "Seminar", "2405231000", 75, (short)15, (short)33,
+            125, shortKeywords, "This");
+
+        data.insert(1729, "Seminar", "2405231000", 75, (short)15, (short)33,
+            125, longKeywords, "This");
+
+    }
+
+
     /**
      * tests the insert method
      */
