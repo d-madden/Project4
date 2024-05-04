@@ -1,5 +1,5 @@
 /**
- * Comment...
+ * Freeblock class, holds data for the freeblocks
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro

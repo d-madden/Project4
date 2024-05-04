@@ -16,12 +16,11 @@ public class SemManagerTest extends TestCase {
 
     /**
      * Get code coverage of the class declaration.
-     * @throws Exception 
+     * 
+     * @throws Exception
      */
-    public void testMInitx() throws Exception
-    {
+    public void testMInitx() throws Exception {
         SemManager sem = new SemManager();
         assertNotNull(sem);
     }
 }
-

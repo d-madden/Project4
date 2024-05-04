@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Comment...
+ * command processor for the project reads commands and calls methods
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro
@@ -97,15 +97,14 @@ public class CommandProcessor {
                         data.search(id);
                     }
                     else if (command.equals("print")) {
-                        
-                        if(arr[1] == "hashtable") {
+
+                        if (arr[1] == "hashtable") {
                             data.printH();
                         }
                         else {
                             data.printF();
                         }
 
-                        
                     }
                     else {
 
