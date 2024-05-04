@@ -15,7 +15,9 @@ public class HashTable {
     // is that your hash tables must be extensible.
 
     private int size;
+    private int elements;
     private Handle[] hash;
+    private static Handle EMPTYHANDLE = null;
 
     // Hash Table constructor
     public HashTable(int hashSize) {
@@ -32,7 +34,7 @@ public class HashTable {
         int home; // Home position for e
         int pos = home = id % size; // Init probe sequence
 
-        for (int i = 1; hash[pos] != null; i++) {
+        for (int i = 1; hash[pos] != EMPTYHANDLE; i++) {
             if (id == hash[pos].getId()) {
                 System.out.println("Duplicates not allowed");
                 return;
@@ -40,6 +42,7 @@ public class HashTable {
             pos = (home + p(id, i)) % size; // Next on probe
         }
         hash[pos] = e;
+        elements++;
 
     }
 
@@ -55,7 +58,7 @@ public class HashTable {
         int home; // Home position for K
         int pos = home = id % size; // Initial position is the home slot
         for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != null); i++) {
+            && (hash[pos] != EMPTYHANDLE); i++) {
             
             pos = (home + p(id, i)) % size; // Next on probe
                                                              // sequence
@@ -63,7 +66,7 @@ public class HashTable {
         if (id == (hash[pos]).getId()) { // Found it
 
             e = hash[pos];
-
+            
             return true;
         }
         else {
@@ -71,10 +74,33 @@ public class HashTable {
         }
     }
 
+    /**
+     * 
+     * @param e
+     * @return
+     */
+    public boolean hashDelete(Handle e) {
 
-    public void hashDelete() {
+        int id = e.getId();
 
-        // 
+        int home; // Home position for K
+        int pos = home = id % size; // Initial position is the home slot
+        for (int i = 1; (id != (hash[pos]).getId())
+            && (hash[pos] != EMPTYHANDLE); i++) {
+            
+            pos = (home + p(id, i)) % size; // Next on probe
+                                                             // sequence
+        }
+        if (id == (hash[pos]).getId()) { // Found it
+
+            e = hash[pos];
+            elements--;
+
+            return true;
+        }
+        else {
+            return false; // K not in hash table
+        }
     }
 
     /**
@@ -85,6 +111,26 @@ public class HashTable {
     public int getSize() {
         
         return size;
+    }
+    
+    /**
+     * gets size of hashTable
+     * 
+     * @return size
+     */
+    public Handle[] getTable() {
+        
+        return hash;
+    }
+    
+    /**
+     * gets size of hashTable
+     * 
+     * @return size
+     */
+    public int getElements() {
+        
+        return elements;
     }
     
     private int p(int K, int i) {
