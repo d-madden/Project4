@@ -37,13 +37,17 @@ public class HashTable {
                 System.out.println("Duplicates not allowed");
                 return;
             }
-            pos = i * ((((id / size) % (size / 2)) * 2) + 1);
+            pos = (home + p(id, i)) % size; // Next on probe
         }
         hash[pos] = e;
 
     }
 
-
+    /**
+     * 
+     * @param e
+     * @return boolean
+     */
     public boolean hashSearch(Handle e) {
 
         int id = e.getId();
@@ -53,7 +57,7 @@ public class HashTable {
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != null); i++) {
             
-            pos = i * ((((id / size) % (size / 2)) * 2) + 1); // Next on probe
+            pos = (home + p(id, i)) % size; // Next on probe
                                                              // sequence
         }
         if (id == (hash[pos]).getId()) { // Found it
@@ -70,11 +74,22 @@ public class HashTable {
 
     public void hashDelete() {
 
+        // 
     }
 
-
-    public int hashSize() {
+    /**
+     * gets size of hashTable
+     * 
+     * @return size
+     */
+    public int getSize() {
+        
         return size;
+    }
+    
+    private int p(int K, int i) {
+        
+        return i * ((((K / size) % (size / 2)) * 2) + 1);
     }
 
 }
