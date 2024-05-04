@@ -90,15 +90,16 @@ public class Database {
 
 
     /**
-     * 
+     * dumps the hash
      */
     public void printH() {
+        hash.dump();
 
     }
 
 
     /**
-     * 
+     * dumps the freetable
      */
     public void printF() {
         mem.dump();
