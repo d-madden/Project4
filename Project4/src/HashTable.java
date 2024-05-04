@@ -85,9 +85,7 @@ public class HashTable {
      * @param e
      * @return
      */
-    public boolean hashDelete(Handle e) {
-
-        int id = e.getId();
+    public boolean hashDelete(int id) {
 
         int home; // Home position for K
         int pos = home = id % size; // Initial position is the home slot
@@ -98,7 +96,8 @@ public class HashTable {
                                                              // sequence
         }
         if (id == (hash[pos]).getId()) { // Found it
-
+            
+            
             hash[pos] = EMPTYHANDLE;
             elements--;
 
