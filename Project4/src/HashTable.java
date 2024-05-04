@@ -14,16 +14,17 @@ public class HashTable {
     // The key difference from what OpenDSA describes
     // is that your hash tables must be extensible.
 
-    private int size;
-    private int elements;
+    private int size;      // size of array
+    private int elements;  // number of handles
     private Handle[] hash;
-    private static Handle EMPTYHANDLE = null;
+    private static Handle EMPTYHANDLE;
 
     // Hash Table constructor
     public HashTable(int hashSize) {
 
         size = hashSize;
         hash = new Handle[size];
+        EMPTYHANDLE = new Handle(-1, 0, 0);
     }
 
 
@@ -93,7 +94,7 @@ public class HashTable {
         }
         if (id == (hash[pos]).getId()) { // Found it
 
-            e = hash[pos];
+            hash[pos] = EMPTYHANDLE;
             elements--;
 
             return true;
@@ -114,9 +115,9 @@ public class HashTable {
     }
     
     /**
-     * gets size of hashTable
+     * gets hashTable array
      * 
-     * @return size
+     * @return hash
      */
     public Handle[] getTable() {
         
@@ -124,9 +125,9 @@ public class HashTable {
     }
     
     /**
-     * gets size of hashTable
+     * gets number of elements in hashTable
      * 
-     * @return size
+     * @return elements
      */
     public int getElements() {
         
