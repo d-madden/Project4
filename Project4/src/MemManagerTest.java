@@ -89,18 +89,18 @@ public class MemManagerTest extends student.TestCase {
         mem.remove(smallH);
 
         String[] longKeywords = { "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good" };
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good" };
         Seminar longMysem = new Seminar(1729, "Seminar", "2405231000", 75,
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();
         Handle tooLong = mem.insert(tLong, tLong.length, 1729);
 
-        assertEquals(tooLong, null);
+        assertNotNull(tooLong);
 
         Database test = new Database(256, 12);
         test.insert(1729, "Seminar", "2405231000", 75, (short)15, (short)33,
@@ -115,6 +115,16 @@ public class MemManagerTest extends student.TestCase {
     public void testGetMemLength() {
         assertEquals(mem.getMemLength(), 256);
 
+    }
+
+
+    /**
+     * tests the dump method
+     */
+    public void testDump() {
+
+        mem.dump();
+        
     }
 
 }

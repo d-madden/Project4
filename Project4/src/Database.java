@@ -75,52 +75,12 @@ public class Database {
         byte[] serialized = s.serialize();
         Handle result = mem.insert(serialized, serialized.length, id);
 
-        // if the manager has no room to insert the seminar it will return null
-        // we then know to resize it, repopulate it and then add the seminar
-        while (result == null) {
-            this.resizeMem();
-            result = mem.insert(serialized, serialized.length, id);
-        }
-
         hash.hashInsert(result);
 
         System.out.println("Successfully inserted record with ID " + id);
         System.out.println(s);
         System.out.println("Size: " + result.getLength());
 
-    }
-
-
-    /**
-     * resizes the memManager when it cant hold a record
-     * 
-     * @throws Exception
-     */
-    private void resizeMem() throws Exception {
-        MemManager memNew = new MemManager(mem.getMemLength() * 2);
-        HashTable hashNew = new HashTable(hash.getSize());
-        // loop through hashtable and remove from old add to new
-
-        Handle temp;
-        byte[] tempArr;
-        Handle[] table = hash.getTable();
-
-        // loops through the table re-adding all the records
-        for (int i = 0; i < hash.getSize(); i++) {
-            temp = table[i];
-            if (temp != null && temp.getId() != -1) {
-                tempArr = new byte[temp.getLength()];
-                mem.get(tempArr, temp);
-                temp = memNew.insert(tempArr, tempArr.length, temp.getId());
-                hashNew.hashInsert(temp);
-            }
-        }
-
-        mem = memNew;
-        hash = hashNew;
-
-        System.out.println("Memory pool expanded to " + mem.getMemLength()
-            + " bytes");
     }
 
 
