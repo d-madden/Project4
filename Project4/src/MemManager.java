@@ -235,8 +235,10 @@ public class MemManager {
     void dump() {
 
         System.out.println("Freeblock List:");
+        Boolean used = false;
         for (int i = 0; i < freeBlock.length; i++) {
             if (freeBlock[i].hasNext()) {
+                used = true;
                 System.out.print(freeBlock[i].getBegIndex() + ": ");
                 FreeBlock curr = freeBlock[i];
                 while (curr.hasNext()) {
@@ -245,6 +247,9 @@ public class MemManager {
                 }
                 System.out.println();
             }
+        }
+        if (!used) {
+            System.out.println("There are no freeblocks in the memory pool");
         }
     }
 }
