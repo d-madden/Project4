@@ -59,10 +59,7 @@ public class Database {
         hash.hashInsert(result);
 
         System.out.println("Successfully inserted record with ID " + id);
-        System.out.println("ID: " + id + "," + "Title: " + title);
-        System.out.println("Date: " + date);
-        System.out.println("Description: " + desc);
-        System.out.println("Keywords: " + keywords.toString());
+        System.out.println(s);
         System.out.println("Size: " + result.getLength());
 
     }
@@ -155,7 +152,7 @@ public class Database {
             byte[] tempArr = new byte[temp.getLength()];
             mem.get(tempArr, temp);
             Seminar sem = Seminar.deserialize(tempArr);
-            sem.toString();
+            System.out.println(sem.toString());
 
         }
         else {
