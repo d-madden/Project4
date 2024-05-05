@@ -25,9 +25,18 @@ public class HashTable {
      *            size of the hash table
      */
     public HashTable(int hashSize) {
+        int i = 0;
+        while (hashSize > Math.pow(i, 2)) {
+            i++;
+        }
+        if (hashSize != Math.pow(i, 2)) {
+            System.out.print("hash not a power of 2 error!!!");
+        }
+        else {
 
-        size = hashSize;
-        hash = new Handle[size];
+            size = hashSize;
+            hash = new Handle[size];
+        }
 
     }
 
