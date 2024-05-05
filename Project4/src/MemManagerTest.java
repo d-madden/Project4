@@ -164,6 +164,8 @@ public class MemManagerTest extends student.TestCase {
             + "512: 1536 2560 \r\n" + "1024: 3072 \r\n"));
 
         mem.remove(one);
+        assertTrue(mem.getMem()[0] == 0);
+        
         mem.remove(two);
         ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent3));
