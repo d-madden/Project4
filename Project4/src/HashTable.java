@@ -49,7 +49,7 @@ public class HashTable {
 
         pos = id % size; // Initial position is the home slot
         home = id % size;
-        
+
         // resizes hash if half full
         if ((elements + 1) > (size / 2)) {
             resize();
@@ -57,8 +57,8 @@ public class HashTable {
                 + " records");
         }
 
-        for (int i = 1; hash[pos] != emptyHandle 
-            && hash[pos].getId() != -1; i++) {
+        for (int i = 1; hash[pos] != emptyHandle && hash[pos]
+            .getId() != -1; i++) {
             if (id == hash[pos].getId()) {
                 System.out.println("Duplicates not allowed");
                 return;
@@ -79,16 +79,16 @@ public class HashTable {
      * @return boolean
      */
     public Handle hashSearch(int id) {
-        
+
         Handle e = null;
 
         int home; // Home position for K
         int pos;
-        
+
         pos = id % size; // Initial position is the home slot
         home = id % size;
-        for (int i = 1; (hash[pos] != emptyHandle)
-            && (id != (hash[pos]).getId()); i++) {
+        for (int i = 1; (hash[pos] != emptyHandle) && (id != (hash[pos])
+            .getId()); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
@@ -116,14 +116,14 @@ public class HashTable {
 
         int home; // Home position for K
         int pos;
-        
+
         pos = id % size; // Initial position is the home slot
         home = id % size;
-        
+
         Handle removed = emptyHandle;
 
-        for (int i = 1; (hash[pos] != emptyHandle)
-            && (id != (hash[pos]).getId()); i++) {
+        for (int i = 1; (hash[pos] != emptyHandle) && (id != (hash[pos])
+            .getId()); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
@@ -167,37 +167,36 @@ public class HashTable {
         System.out.println("total records: " + elements);
 
     }
-    
+
+
     /**
      * resizes hash table
      * 
-     * @return newHash
-     * new hashtable resized
      */
     public void resize() {
-        
+
         int oldSize = this.size;
         Handle[] oldArr = this.hash;
-        
+
         this.size = size * 2;
         this.hash = new Handle[size];
-        
+
         for (int i = 0; i < oldSize; i++) {
-            
+
             if (oldArr[i] == null) {
-                
+
                 continue;
             }
-            else if (oldArr[i].getId() != -1) {
-                
+            else if (oldArr[i].getId() == -1) {
+
                 continue;
             }
             else {
                 this.hashInsert(oldArr[i]);
             }
-            
+
         }
-        
+
     }
 
 

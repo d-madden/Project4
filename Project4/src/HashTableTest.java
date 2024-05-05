@@ -113,7 +113,10 @@ public class HashTableTest extends student.TestCase {
         h.hashInsert(d2);
         h.hashInsert(d3);
         h.hashInsert(d4);
+        h.hashDelete(4);
+        
         h.hashInsert(d5);
+        h.hashInsert(d4);
         
         assertEquals(h.getSize(), 16);
     }
