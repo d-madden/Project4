@@ -140,7 +140,28 @@ public class Database {
     }
 
 
-    public void search(int id) {
+    /**
+     * search method
+     * 
+     * @param id
+     *            takes id you searching for
+     * @throws Exception
+     */
+    public void search(int id) throws Exception {
+        Handle temp = hash.hashSearch(id);
+
+        if (temp != null) {
+            System.out.println("Found record with ID " + id + ":");
+            byte[] tempArr = new byte[temp.getLength()];
+            mem.get(tempArr, temp);
+            Seminar sem = Seminar.deserialize(tempArr);
+            sem.toString();
+
+        }
+        else {
+            System.out.println("Search FAILED -- There is no record with ID "
+                + id);
+        }
 
     }
 
