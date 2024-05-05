@@ -232,11 +232,12 @@ public class HashTable {
 
         return elements;
     }
-
-
+    
     /**
      * mod formula for traversal
      * 
+     * @param k
+     * @param i
      * @return answer
      * answer to mod formula for given point
      */
