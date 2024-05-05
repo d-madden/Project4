@@ -83,6 +83,10 @@ public class Database {
             }
         }
 
+        hash = hashnew;
+        System.out.println("Hash table expanded to " + hash.getSize()
+            + " records");
+
     }
 
 
@@ -113,6 +117,9 @@ public class Database {
 
         mem = memNew;
         hash = hashNew;
+
+        System.out.print("Memory pool expanded to " + mem.getMemLength()
+            + " bytes");
     }
 
 
