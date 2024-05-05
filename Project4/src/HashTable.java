@@ -55,14 +55,13 @@ public class HashTable {
 
     /**
      * 
-     * @param e
+     * @param id
      * @return boolean
      */
-    public boolean hashSearch(Handle e) {
-
-        int id = e.getId();
+    public Handle hashSearch(int id) {
 
         int home; // Home position for K
+        Handle e = null;
         int pos = home = id % size; // Initial position is the home slot
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != EMPTYHANDLE); i++) {
@@ -74,10 +73,10 @@ public class HashTable {
 
             e = hash[pos];
 
-            return true;
+            return e;
         }
         else {
-            return false; // K not in hash table
+            return e; // K not in hash table
         }
     }
 
@@ -92,7 +91,7 @@ public class HashTable {
         int home; // Home position for K
         int pos = home = id % size; // Initial position is the home slot
         Handle removed = EMPTYHANDLE;
-        
+
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != EMPTYHANDLE); i++) {
 
@@ -100,7 +99,7 @@ public class HashTable {
                                             // sequence
         }
         if (id == (hash[pos]).getId()) { // Found it
-            
+
             removed = hash[pos];
             hash[pos] = EMPTYHANDLE;
             elements--;
@@ -117,19 +116,19 @@ public class HashTable {
      * dumps hashTable
      */
     public void dump() {
-        
+
         System.out.println("Hashtable: ");
-        
+
         for (int i = 0; i < size; i++) {
-            
+
             if (hash[i].getId() != -1) {
-                
+
                 System.out.println(i + ": " + hash[i].getId());
-                
+
             }
-            
+
         }
-        
+
         System.out.println("total records: " + elements);
 
     }

@@ -35,6 +35,12 @@ public class Database {
             this.resizeHash();
         }
 
+        if (hash.hashSearch(id) != null) {
+            System.out.println(
+                "Insert FAILED - There is already a record with ID " + id);
+            return;
+        }
+
         // creates the seminar object serializing it and insering it to
         // memManager
         Seminar s = new Seminar(id, title, date, length, x, y, cost, keywords,
@@ -51,6 +57,13 @@ public class Database {
         }
 
         hash.hashInsert(result);
+
+        System.out.println("Successfully inserted record with ID " + id);
+        System.out.println("ID: " + id + "," + "Title: " + title);
+        System.out.println("Date: " + date);
+        System.out.println("Description: " + desc);
+        System.out.println("Keywords: " + keywords.toString());
+        System.out.println("Size: " + result.getLength());
 
     }
 
