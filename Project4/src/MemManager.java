@@ -337,7 +337,7 @@ public class MemManager {
             FreeBlock temp2 = this.buddy(block, handStart);
             while (temp2 != null) {
                 compress(block, handStart, temp2);
-                temp2 = this.buddy(block, handStart);
+                temp2 = this.buddy(block + 1, handStart);
             }
         }
 
