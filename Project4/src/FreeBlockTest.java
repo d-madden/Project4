@@ -6,7 +6,7 @@
  */
 public class FreeBlockTest extends student.TestCase {
 
-    FreeBlock test;
+    private FreeBlock test;
 
     /**
      * sets up the test methods

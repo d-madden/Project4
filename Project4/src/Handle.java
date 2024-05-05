@@ -5,7 +5,7 @@
  * @version 04-21-2024
  */
 public class Handle {
-    private int ID;
+    private int id;
     private int start;
     private int length;
 
@@ -18,8 +18,8 @@ public class Handle {
      * @param ln
      *            the length of the record
      */
-    public Handle(int Id, int st, int ln) {
-        ID = Id;
+    public Handle(int iD, int st, int ln) {
+        id = iD;
         start = st;
         length = ln;
 
@@ -32,7 +32,7 @@ public class Handle {
      *         returns the ID
      */
     public int getId() {
-        return ID;
+        return id;
     }
 
 

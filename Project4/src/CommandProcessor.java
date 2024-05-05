@@ -37,7 +37,7 @@ public class CommandProcessor {
      *            size of memory
      * @param hashSize
      *            size of hash table
-     * @param file
+     * @param fileName
      *            name of input file
      * @throws Exception
      */

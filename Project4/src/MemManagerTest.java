@@ -9,7 +9,7 @@ import java.io.PrintStream;
  */
 public class MemManagerTest extends student.TestCase {
 
-    MemManager mem;
+    private MemManager mem;
 
     /**
      * sets up the test methods

@@ -1,5 +1,5 @@
 /**
- * Comment...
+ * Database delegates commands and prints output
  * 
  * @author Daniel Madden
  * @author Jordan DeNaro
@@ -10,6 +10,12 @@ public class Database {
     private MemManager mem;
     private HashTable hash;
 
+
+    /**
+     * constructor for database
+     * @param memSize
+     * @param hashSize
+     */
     public Database(int memSize, int hashSize) {
 
         mem = new MemManager(memSize);
@@ -18,6 +24,19 @@ public class Database {
     }
 
 
+    /**
+     * insert function inserts new
+     * @param id
+     * @param title
+     * @param date
+     * @param length
+     * @param x
+     * @param y
+     * @param cost
+     * @param keywords
+     * @param desc
+     * @throws Exception
+     */
     public void insert(
         int id,
         String title,
@@ -28,7 +47,7 @@ public class Database {
         int cost,
         String[] keywords,
         String desc)
-        throws Exception {
+            throws Exception {
 
         // resizes hash if half full
         if (hash.isFull()) {
@@ -82,7 +101,7 @@ public class Database {
 
         hash = hashnew;
         System.out.println("Hash table expanded to " + hash.getSize()
-            + " records");
+        + " records");
 
     }
 
@@ -116,10 +135,14 @@ public class Database {
         hash = hashNew;
 
         System.out.println("Memory pool expanded to " + mem.getMemLength()
-            + " bytes");
+        + " bytes");
     }
 
 
+    /**
+     * delete deletes something
+     * @param id
+     */
     public void delete(int id) {
         Handle temp = hash.hashDelete(id);
 

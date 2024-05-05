@@ -6,7 +6,7 @@
  */
 public class HandleTest extends student.TestCase {
 
-    Handle test;
+    private Handle test;
 
     /**
      * sets up the test methods

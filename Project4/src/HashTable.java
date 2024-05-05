@@ -17,30 +17,39 @@ public class HashTable {
     private int size; // size of array
     private int elements; // number of handles
     private Handle[] hash;
-    private static Handle EMPTYHANDLE;
+    private static Handle emptyHandle;
 
-    // Hash Table constructor
+    /**
+     * hashtable constructor
+     * @param hashSize
+     */
     public HashTable(int hashSize) {
 
         size = hashSize;
         hash = new Handle[size];
-        EMPTYHANDLE = new Handle(-1, 0, 0);
+        emptyHandle = new Handle(-1, 0, 0);
 
         // populates the array with tombstones
         for (int i = 0; i < size; i++) {
-            hash[i] = EMPTYHANDLE;
+            hash[i] = emptyHandle;
         }
     }
 
 
+    /**
+     * inserts into hashtable
+     * @param e
+     */
     public void hashInsert(Handle e) {
 
         int id = e.getId();
 
         int home; // Home position for e
-        int pos = home = id % size; // Init probe sequence
+        int pos;
+        
+        pos = home = id % size; // Init probe sequence
 
-        for (int i = 1; hash[pos] != EMPTYHANDLE; i++) {
+        for (int i = 1; hash[pos] != emptyHandle; i++) {
             if (id == hash[pos].getId()) {
                 System.out.println("Duplicates not allowed");
                 return;
@@ -54,17 +63,19 @@ public class HashTable {
 
 
     /**
-     * 
+     * searches hashtable
      * @param id
+     *          identification
      * @return boolean
      */
     public Handle hashSearch(int id) {
 
         int home; // Home position for K
         Handle e = null;
-        int pos = home = id % size; // Initial position is the home slot
+        int pos;
+        pos = home = id % size; // Initial position is the home slot
         for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != EMPTYHANDLE); i++) {
+            && (hash[pos] != emptyHandle); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
@@ -82,18 +93,20 @@ public class HashTable {
 
 
     /**
-     * 
-     * @param e
+     * deletes hashtable
+     * @param id
+     *          id imagine this is the id of element to delete
      * @return removed handle
      */
     public Handle hashDelete(int id) {
 
         int home; // Home position for K
-        int pos = home = id % size; // Initial position is the home slot
-        Handle removed = EMPTYHANDLE;
+        int pos;
+        pos = home = id % size; // Initial position is the home slot
+        Handle removed = emptyHandle;
 
         for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != EMPTYHANDLE); i++) {
+            && (hash[pos] != emptyHandle); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
@@ -101,13 +114,13 @@ public class HashTable {
         if (id == (hash[pos]).getId()) { // Found it
 
             removed = hash[pos];
-            hash[pos] = EMPTYHANDLE;
+            hash[pos] = emptyHandle;
             elements--;
 
             return removed;
         }
         else {
-            return EMPTYHANDLE; // K not in hash table
+            return emptyHandle; // K not in hash table
         }
     }
 
@@ -166,13 +179,6 @@ public class HashTable {
         return elements;
     }
 
-
-    private int p(int K, int i) {
-
-        return i * ((((K / size) % (size / 2)) * 2) + 1);
-    }
-
-
     /**
      * 
      * @return
@@ -181,6 +187,11 @@ public class HashTable {
     public boolean isFull() {
         return (elements > size / 2);
 
+    }
+
+    private int p(int k, int i) {
+
+        return i * ((((k / size) % (size / 2)) * 2) + 1);
     }
 
 }

@@ -7,8 +7,8 @@
  */
 public class MemManager {
 
-    byte[] mem;
-    FreeBlock[] freeBlock;
+    public byte[] mem;
+    public FreeBlock[] freeBlock;
 
     /**
      * constructor for the memory pool
@@ -40,6 +40,8 @@ public class MemManager {
      *            byte array of the serialized seminar
      * @param size
      *            size of the serialized seminar
+     * @param id
+     *            id of the seminar
      * @return
      *         returns a handle receipt of the stored memory
      * @throws Exception
