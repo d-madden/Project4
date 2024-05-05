@@ -2,7 +2,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
-* 
+ * 
  * @author Daniel Madden
  * @author Jordan DeNaro
  * @version 04-21-2024
@@ -89,12 +89,12 @@ public class MemManagerTest extends student.TestCase {
         mem.remove(smallH);
 
         String[] longKeywords = { "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good" };
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good" };
         Seminar longMysem = new Seminar(1729, "Seminar", "2405231000", 75,
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();
