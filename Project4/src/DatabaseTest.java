@@ -104,4 +104,41 @@ public class DatabaseTest extends student.TestCase {
             systemOut().getHistory());
     }
 
+
+    /**
+     * tests the entire output
+     * 
+     * @throws Exception
+     */
+    public void testOutTwo() throws Exception {
+
+        String[] arr = { "256", "256", "P1SimpSample_inputX.txt" };
+
+        SemManager.main(arr);
+
+        assertFuzzyEquals("Successfully inserted record with ID 1\n"
+            + "ID: 1, Title: Overview of HCI Research at VT\n"
+            + "Date: 0610051600, Length: 90, X: 10, Y: 10, Cost: 45\n"
+            + "Description: This seminar will present an overview of HCI research at VT\n"
+            + "Keywords: HCI, Computer_Science, VT, Virginia_Tech\n"
+            + "Size: 173\n" + "Memory pool expanded to 512 bytes\n"
+            + "Successfully inserted record with ID 2\n"
+            + "ID: 2, Title: Computational Biology and Bioinformatics in CS at Virginia Tech\n"
+            + "Date: 0610071600, Length: 60, X: 20, Y: 10, Cost: 30\n"
+            + "Description: Introduction to   bioinformatics and computation biology\n"
+            + "Keywords: Bioinformatics, computation_biology, Biology, Computer_Science, VT, Virginia_Tech\n"
+            + "Size: 244\n" + "Memory pool expanded to 1024 bytes\n"
+            + "Successfully inserted record with ID 3\n"
+            + "ID: 3, Title: Computing Systems Research at VT\n"
+            + "Date: 0701250830, Length: 30, X: 30, Y: 10, Cost: 17\n"
+            + "Description: Seminar about the      Computing systems research at      VT\n"
+            + "Keywords: high_performance_computing, grids, VT, computer, science\n"
+            + "Size: 192\n" + "Successfully inserted record with ID 10\n"
+            + "ID: 10, Title: Overview of HPC and CSE Research at VT\n"
+            + "Date: 0703301125, Length: 35, X: 0, Y: 0, Cost: 25\n"
+            + "Description: Learn what kind of    research is done on HPC  and CSE at VT\n"
+            + "Keywords: HPC, CSE, computer_science\n" + "Size: 168\n",
+            systemOut().getHistory());
+    }
+
 }
