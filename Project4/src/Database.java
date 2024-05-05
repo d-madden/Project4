@@ -121,12 +121,12 @@ public class Database {
 
         // if the id is not in the hash
         if (temp == null) {
-            System.out.print("Delete FAILED -- There is no record with ID "
+            System.out.println("Delete FAILED -- There is no record with ID "
                 + id);
         }
         else {
             mem.remove(temp);
-            System.out.print("Record with ID " + id
+            System.out.println("Record with ID " + id
                 + " successfully deleted from the database");
         }
 

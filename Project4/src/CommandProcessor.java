@@ -64,10 +64,9 @@ public class CommandProcessor {
                     String[] arr = line.trim().split("\\s+");
 
                     String command = arr[0];
-                    
 
                     if (command.equals("insert")) {
-                        
+
                         int id = Integer.parseInt(arr[1]);
 
                         String title = scanner.nextLine().trim();
@@ -91,20 +90,20 @@ public class CommandProcessor {
 
                     }
                     else if (command.equals("delete")) {
-                        
+
                         int id = Integer.parseInt(arr[1]);
 
                         data.delete(id);
                     }
                     else if (command.equals("search")) {
-                        
+
                         int id = Integer.parseInt(arr[1]);
 
                         data.search(id);
                     }
                     else if (command.equals("print")) {
 
-                        if (arr[1] == "hashtable") {
+                        if (arr[1].equals("hashtable")) {
                             data.printH();
                         }
                         else {
