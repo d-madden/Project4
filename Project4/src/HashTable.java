@@ -28,6 +28,7 @@ public class HashTable {
     public HashTable(int hashSize) {
 
         size = hashSize;
+        elements = 0;
         hash = new Handle[size];
 
     }
@@ -48,6 +49,13 @@ public class HashTable {
 
         pos = id % size; // Initial position is the home slot
         home = id % size;
+        
+        // resizes hash if half full
+        if ((elements + 1) > (size / 2)) {
+            resize();
+            System.out.println("Hash table expanded to " + getSize()
+                + " records");
+        }
 
         for (int i = 1; hash[pos] != emptyHandle 
             && hash[pos].getId() != -1; i++) {
@@ -160,27 +168,36 @@ public class HashTable {
 
     }
     
-    public HashTable resized() {
+    /**
+     * resizes hash table
+     * 
+     * @return newHash
+     * new hashtable resized
+     */
+    public void resize() {
         
-        HashTable newHash = new HashTable(size * 2);
+        int oldSize = this.size;
+        Handle[] oldArr = this.hash;
+        
+        this.size = size * 2;
+        this.hash = new Handle[size];
+        
+        for (int i = 0; i < oldSize; i++) {
             
-        for (int i = 0; i < size; i++) {
-            
-            if (hash[i] == null) {
+            if (oldArr[i] == null) {
                 
                 continue;
             }
-            else if (hash[i].getId() != -1) {
+            else if (oldArr[i].getId() != -1) {
                 
                 continue;
             }
             else {
-                newHash.hashInsert(hash[i]);
+                this.hashInsert(oldArr[i]);
             }
             
         }
         
-        return newHash;
     }
 
 
@@ -214,17 +231,6 @@ public class HashTable {
     public int getElements() {
 
         return elements;
-    }
-
-
-    /**
-     * 
-     * @return
-     *         true if its half full
-     */
-    public boolean isFull() {
-        return (elements > size / 2);
-
     }
 
 

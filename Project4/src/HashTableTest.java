@@ -99,5 +99,25 @@ public class HashTableTest extends student.TestCase {
         
 
     }
+    
+    /**
+     * tests the insert method of hashtable
+     * 
+     * @throws Exception
+     * 
+     * 
+     */
+    public void testResize() throws Exception {
+        
+        h.hashInsert(d);
+        h.hashInsert(d2);
+        h.hashInsert(d3);
+        h.hashInsert(d4);
+        h.hashInsert(d5);
+        
+        assertEquals(h.getSize(), 16);
+    }
+    
+    
 
 }

@@ -61,13 +61,6 @@ public class Database {
         String desc)
         throws Exception {
 
-        // resizes hash if half full
-        if (hash.isFull()) {
-            hash = hash.resized();
-            System.out.println("Hash table expanded to " + hash.getSize()
-                + " records");
-        }
-
         if (hash.hashSearch(id) != null) {
             System.out.println(
                 "Insert FAILED - There is already a record with ID " + id);
