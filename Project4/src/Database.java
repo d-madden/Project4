@@ -63,7 +63,9 @@ public class Database {
 
         // resizes hash if half full
         if (hash.isFull()) {
-            this.resizeHash();
+            hash = hash.resized();
+            System.out.println("Hash table expanded to " + hash.getSize()
+                + " records");
         }
 
         if (hash.hashSearch(id) != null) {
@@ -97,28 +99,6 @@ public class Database {
 
 
     /**
-     * resizes hash table
-     */
-    private void resizeHash() {
-        HashTable hashnew = new HashTable(hash.getSize() * 2);
-
-        Handle[] table = hash.getTable();
-        Handle temp;
-        for (int i = 0; i < hash.getSize(); i++) {
-            temp = table[i];
-            if (temp.getId() != -1) {
-                hashnew.hashInsert(temp);
-            }
-        }
-
-        hash = hashnew;
-        System.out.println("Hash table expanded to " + hash.getSize()
-            + " records");
-
-    }
-
-
-    /**
      * resizes the memManager when it cant hold a record
      * 
      * @throws Exception
@@ -135,7 +115,7 @@ public class Database {
         // loops through the table re-adding all the records
         for (int i = 0; i < hash.getSize(); i++) {
             temp = table[i];
-            if (temp.getId() != -1) {
+            if (temp != null && temp.getId() != -1) {
                 tempArr = new byte[temp.getLength()];
                 mem.get(tempArr, temp);
                 temp = memNew.insert(tempArr, tempArr.length, temp.getId());
@@ -161,7 +141,7 @@ public class Database {
         Handle temp = hash.hashDelete(id);
 
         // if the id is not in the hash
-        if (temp.getId() == -1) {
+        if (temp == null || temp.getId() == -1) {
             System.out.println("Delete FAILED -- There is no record with ID "
                 + id);
         }

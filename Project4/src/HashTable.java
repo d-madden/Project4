@@ -17,7 +17,7 @@ public class HashTable {
     private int size; // size of array
     private int elements; // number of handles
     private Handle[] hash;
-    private static Handle emptyHandle;
+    private static Handle emptyHandle = null;
 
     /**
      * hashtable constructor
@@ -29,12 +29,7 @@ public class HashTable {
 
         size = hashSize;
         hash = new Handle[size];
-        emptyHandle = new Handle(-1, 0, 0);
 
-        // populates the array with tombstones
-        for (int i = 0; i < size; i++) {
-            hash[i] = emptyHandle;
-        }
     }
 
 
@@ -54,7 +49,8 @@ public class HashTable {
         pos = id % size; // Initial position is the home slot
         home = id % size;
 
-        for (int i = 1; hash[pos] != emptyHandle; i++) {
+        for (int i = 1; hash[pos] != emptyHandle 
+            && hash[pos].getId() != -1; i++) {
             if (id == hash[pos].getId()) {
                 System.out.println("Duplicates not allowed");
                 return;
@@ -75,19 +71,21 @@ public class HashTable {
      * @return boolean
      */
     public Handle hashSearch(int id) {
+        
+        Handle e = null;
 
         int home; // Home position for K
-        Handle e = null;
         int pos;
+        
         pos = id % size; // Initial position is the home slot
         home = id % size;
-        for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != emptyHandle); i++) {
+        for (int i = 1; (hash[pos] != emptyHandle)
+            && (id != (hash[pos]).getId()); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
         }
-        if (id == (hash[pos]).getId()) { // Found it
+        if ((hash[pos] != emptyHandle) && (id == (hash[pos]).getId())) {
 
             e = hash[pos];
 
@@ -110,20 +108,22 @@ public class HashTable {
 
         int home; // Home position for K
         int pos;
+        
         pos = id % size; // Initial position is the home slot
         home = id % size;
+        
         Handle removed = emptyHandle;
 
-        for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != emptyHandle); i++) {
+        for (int i = 1; (hash[pos] != emptyHandle)
+            && (id != (hash[pos]).getId()); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
         }
-        if (id == (hash[pos]).getId()) { // Found it
+        if ((hash[pos] != emptyHandle) && (id == (hash[pos]).getId())) {
 
             removed = hash[pos];
-            hash[pos] = emptyHandle;
+            hash[pos] = Tombstone.getInstance();
             elements--;
 
             return removed;
@@ -143,9 +143,14 @@ public class HashTable {
 
         for (int i = 0; i < size; i++) {
 
-            if (hash[i].getId() != -1) {
+            if (hash[i] != null && hash[i].getId() != -1) {
 
                 System.out.println(i + ": " + hash[i].getId());
+
+            }
+            else if (hash[i] != null) {
+
+                System.out.println(i + ": TOMBSTONE");
 
             }
 
@@ -153,6 +158,29 @@ public class HashTable {
 
         System.out.println("total records: " + elements);
 
+    }
+    
+    public HashTable resized() {
+        
+        HashTable newHash = new HashTable(size * 2);
+            
+        for (int i = 0; i < size; i++) {
+            
+            if (hash[i] == null) {
+                
+                continue;
+            }
+            else if (hash[i].getId() != -1) {
+                
+                continue;
+            }
+            else {
+                newHash.hashInsert(hash[i]);
+            }
+            
+        }
+        
+        return newHash;
     }
 
 
