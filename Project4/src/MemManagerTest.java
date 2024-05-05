@@ -28,7 +28,7 @@ public class MemManagerTest extends student.TestCase {
      */
     public void testInsert() throws Exception {
 
-        assertTrue(mem.getFree().length == 8);
+        assertEquals(mem.getFree().length, 8);
 
         int num = 2;
         for (int i = 0; i < mem.getFree().length; i++) {
@@ -151,7 +151,8 @@ public class MemManagerTest extends student.TestCase {
         System.setOut(new PrintStream(outContent1));
         mem.dump();
         String output1 = outContent1.toString();
-        assertTrue(output1.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+        assertTrue(output1.contains("Freeblock List:\n"
+            + "256: 256 \n"
             + "1024: 3072 "));
 
         mem.remove(three);
@@ -160,18 +161,21 @@ public class MemManagerTest extends student.TestCase {
         System.setOut(new PrintStream(outContent2));
         mem.dump();
         String output2 = outContent2.toString();
-        assertTrue(output2.contains("Freeblock List:\r\n" + "256: 256 \r\n"
-            + "512: 1536 2560 \r\n" + "1024: 3072 \r\n"));
+        assertTrue(output2.contains("Freeblock List:\n"
+            + "256: 256 \n"
+            + "512: 1536 2560 \n"
+            + "1024: 3072 "));
 
         mem.remove(one);
-        assertTrue(mem.getMem()[0] == 0);
+        assertEquals(mem.getMem()[0], 0);
         
         mem.remove(two);
         ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent3));
         mem.dump();
         String output3 = outContent3.toString();
-        assertTrue(output3.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+        assertTrue(output3.contains("Freeblock List:\n"
+            + "256: 256 \n"
             + "1024: 1024 "));
 
         mem.remove(four);
@@ -179,8 +183,8 @@ public class MemManagerTest extends student.TestCase {
         System.setOut(new PrintStream(outContent4));
         mem.dump();
         String output4 = outContent4.toString();
-        assertTrue(output4.contains("Freeblock List:\r\n" + "256: 256 \r\n"
-            + "512: 2048 \r\n" + "1024: 1024 "));
+        assertTrue(output4.contains("Freeblock List:\n" + "256: 256 \n"
+            + "512: 2048 \n" + "1024: 1024 "));
     }
 
 
