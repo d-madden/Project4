@@ -14,7 +14,9 @@ public class Database {
      * constructor for database
      * 
      * @param memSize
+     *            is the size of the memory pool
      * @param hashSize
+     *            is the hashsize
      */
     public Database(int memSize, int hashSize) {
 
@@ -28,17 +30,23 @@ public class Database {
      * insert function inserts new
      * 
      * @param id
-     *          identification
+     *            identification number
      * @param title
-     *          title
+     *            title
      * @param date
-     *          date of thing
+     *            date of record
      * @param length
+     *            length of the record
      * @param x
+     *            x of the record
      * @param y
+     *            y of the record
      * @param cost
+     *            cost of the record
      * @param keywords
+     *            keywords of the record
      * @param desc
+     *            description of the record
      * @throws Exception
      */
     public void insert(
@@ -51,7 +59,7 @@ public class Database {
         int cost,
         String[] keywords,
         String desc)
-            throws Exception {
+        throws Exception {
 
         // resizes hash if half full
         if (hash.isFull()) {
@@ -147,6 +155,7 @@ public class Database {
      * delete deletes something
      * 
      * @param id
+     *            id of what we are deleting
      */
     public void delete(int id) {
         Handle temp = hash.hashDelete(id);
