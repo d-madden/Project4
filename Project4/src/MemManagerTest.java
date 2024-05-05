@@ -2,7 +2,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
- * 
+* 
  * @author Daniel Madden
  * @author Jordan DeNaro
  * @version 04-21-2024
@@ -28,15 +28,15 @@ public class MemManagerTest extends student.TestCase {
      */
     public void testInsert() throws Exception {
 
-        assertTrue(mem.freeBlock.length == 8);
+        assertTrue(mem.getFree().length == 8);
 
         int num = 2;
-        for (int i = 0; i < mem.freeBlock.length; i++) {
-            assertEquals(mem.freeBlock[i].getBegIndex(), num);
+        for (int i = 0; i < mem.getFree().length; i++) {
+            assertEquals(mem.getFree()[i].getBegIndex(), num);
             num *= 2;
 
         }
-        assertEquals(mem.freeBlock[mem.freeBlock.length - 1].getNext()
+        assertEquals(mem.getFree()[mem.getFree().length - 1].getNext()
             .getBegIndex(), 0);
 
         String[] keywords = { "Good" };
@@ -49,18 +49,18 @@ public class MemManagerTest extends student.TestCase {
 
         Handle returned = mem.insert(toAdd, toAdd.length, 1729);
 
-        assertFalse(mem.freeBlock[mem.freeBlock.length - 1].hasNext());
+        assertFalse(mem.getFree()[mem.getFree().length - 1].hasNext());
 
-        assertTrue(mem.freeBlock[mem.freeBlock.length - 2].hasNext());
-        assertEquals(mem.freeBlock[mem.freeBlock.length - 2].getNext()
+        assertTrue(mem.getFree()[mem.getFree().length - 2].hasNext());
+        assertEquals(mem.getFree()[mem.getFree().length - 2].getNext()
             .getBegIndex(), 128);
 
-        assertTrue(mem.freeBlock[mem.freeBlock.length - 3].hasNext());
-        assertEquals(mem.freeBlock[mem.freeBlock.length - 3].getNext()
+        assertTrue(mem.getFree()[mem.getFree().length - 3].hasNext());
+        assertEquals(mem.getFree()[mem.getFree().length - 3].getNext()
             .getBegIndex(), 64);
 
         for (int i = 0; i < toAdd.length; i++) {
-            assertEquals(mem.mem[i], toAdd[i]);
+            assertEquals(mem.getMem()[i], toAdd[i]);
         }
 
         byte[] hold = new byte[100];
@@ -88,8 +88,13 @@ public class MemManagerTest extends student.TestCase {
         mem.remove(returned);
         mem.remove(smallH);
 
-        String[] longKeywords = {
-            "Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good, Good" };
+        String[] longKeywords = { "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good" };
         Seminar longMysem = new Seminar(1729, "Seminar", "2405231000", 75,
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();

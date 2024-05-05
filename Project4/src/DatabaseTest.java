@@ -24,15 +24,15 @@ public class DatabaseTest extends student.TestCase {
     public void testResize() throws Exception {
         String[] longKeywords = {
             "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good" };
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good" };
 
         String[] shortKeywords = { "hello, Time, ONE" };
 

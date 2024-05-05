@@ -10,9 +10,9 @@ public class Database {
     private MemManager mem;
     private HashTable hash;
 
-
     /**
      * constructor for database
+     * 
      * @param memSize
      * @param hashSize
      */
@@ -26,9 +26,13 @@ public class Database {
 
     /**
      * insert function inserts new
+     * 
      * @param id
+     *          identification
      * @param title
+     *          title
      * @param date
+     *          date of thing
      * @param length
      * @param x
      * @param y
@@ -101,7 +105,7 @@ public class Database {
 
         hash = hashnew;
         System.out.println("Hash table expanded to " + hash.getSize()
-        + " records");
+            + " records");
 
     }
 
@@ -135,12 +139,13 @@ public class Database {
         hash = hashNew;
 
         System.out.println("Memory pool expanded to " + mem.getMemLength()
-        + " bytes");
+            + " bytes");
     }
 
 
     /**
      * delete deletes something
+     * 
      * @param id
      */
     public void delete(int id) {

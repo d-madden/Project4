@@ -47,7 +47,8 @@ public class HashTable {
         int home; // Home position for e
         int pos;
         
-        pos = home = id % size; // Init probe sequence
+        pos = id % size; // Initial position is the home slot
+        home = id % size;
 
         for (int i = 1; hash[pos] != emptyHandle; i++) {
             if (id == hash[pos].getId()) {
@@ -73,7 +74,8 @@ public class HashTable {
         int home; // Home position for K
         Handle e = null;
         int pos;
-        pos = home = id % size; // Initial position is the home slot
+        pos = id % size; // Initial position is the home slot
+        home = id % size;
         for (int i = 1; (id != (hash[pos]).getId())
             && (hash[pos] != emptyHandle); i++) {
 
@@ -102,7 +104,8 @@ public class HashTable {
 
         int home; // Home position for K
         int pos;
-        pos = home = id % size; // Initial position is the home slot
+        pos = id % size; // Initial position is the home slot
+        home = id % size;
         Handle removed = emptyHandle;
 
         for (int i = 1; (id != (hash[pos]).getId())

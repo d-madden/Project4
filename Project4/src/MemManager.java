@@ -7,8 +7,8 @@
  */
 public class MemManager {
 
-    public byte[] mem;
-    public FreeBlock[] freeBlock;
+    private byte[] mem;
+    private FreeBlock[] freeBlock;
 
     /**
      * constructor for the memory pool
@@ -253,5 +253,15 @@ public class MemManager {
         if (!used) {
             System.out.println("There are no freeblocks in the memory pool");
         }
+    }
+    
+    public byte[] getMem() {
+        
+        return mem;
+    }
+    
+    public FreeBlock[] getFree() {
+        
+        return freeBlock;
     }
 }
