@@ -6,6 +6,7 @@
  * @version 04-21-2024
  */
 public class TombstoneTest extends student.TestCase {
+    
     /**
      * tests the tombstone utilization
      */
@@ -21,5 +22,7 @@ public class TombstoneTest extends student.TestCase {
         assertSame(
             "The second instance should be the same as the first instance",
             firstInstance, secondInstance);
+        
     }
+    
 }

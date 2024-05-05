@@ -127,6 +127,9 @@ public class HashTableTest extends student.TestCase {
             systemOut().getHistory());
         
         h.hashInsert(d5);
+        
+        assertEquals(h.getSize(), 8);
+        
         h.hashInsert(d4);
         
         assertEquals(h.getSize(), 16);
@@ -150,6 +153,72 @@ public class HashTableTest extends student.TestCase {
             systemOut().getHistory());
         
         
+        
+        
+        
+    }
+    
+    /**
+     * tests the insert method of hashtable
+     * 
+     * @throws Exception
+     * 
+     * 
+     */
+    public void testTombstones() throws Exception {
+        
+        h.hashInsert(d);
+        h.hashInsert(d2);
+        h.hashInsert(d3);
+        h.hashInsert(d5);
+        
+        h.hashDelete(5);
+        h.hashDelete(3);
+        h.hashDelete(2);
+        h.hashDelete(1);
+        
+        h.dump();
+        
+        assertFuzzyEquals("Hashtable: \n"
+            + "1: TOMBSTONE\n"
+            + "2: TOMBSTONE\n"
+            + "3: TOMBSTONE\n"
+            + "5: TOMBSTONE\n"
+            + "total records: 0",
+            systemOut().getHistory());
+        
+        assertEquals(h.getSize(), 8);
+        
+        Handle d6 = new Handle(6, 6, 6);
+        Handle d7 = new Handle(7, 7, 7);
+        Handle d8 = new Handle(8, 8, 8);
+        Handle d9 = new Handle(9, 9, 9);
+        
+        h.hashInsert(d);
+        h.hashInsert(d6);
+        h.hashInsert(d7);
+        h.hashInsert(d8);
+        h.hashInsert(d9);
+        
+        h.dump();
+        
+        assertFuzzyEquals("Hashtable: \n"
+            + "1: TOMBSTONE\n"
+            + "2: TOMBSTONE\n"
+            + "3: TOMBSTONE\n"
+            + "5: TOMBSTONE\n"
+            + "total records: 0\n"
+            + "Hash table expanded to 16 records\n"
+            + "Hashtable: \n"
+            + "1: 1\n"
+            + "2: 9\n"
+            + "6: 6\n"
+            + "7: 7\n"
+            + "8: 8\n"
+            + "total records: 5",
+            systemOut().getHistory());
+        
+        assertEquals(h.getSize(), 16);
         
         
         

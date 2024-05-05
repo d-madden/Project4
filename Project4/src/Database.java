@@ -134,7 +134,7 @@ public class Database {
         Handle temp = hash.hashDelete(id);
 
         // if the id is not in the hash
-        if (temp == null || temp.getId() == -1) {
+        if (temp == null) {
             System.out.println("Delete FAILED -- There is no record with ID "
                 + id);
         }
