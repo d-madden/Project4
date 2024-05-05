@@ -110,6 +110,79 @@ public class MemManagerTest extends student.TestCase {
 
 
     /**
+     * tests the whole thing
+     * 
+     * @throws Exception
+     */
+    public void testEverything() throws Exception {
+        String[] longKeywords = { "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good" };
+        Seminar mysem = new Seminar(1, "Seminar", "2405231000", 75, (short)15,
+            (short)33, 125, longKeywords, "This");
+        byte[] tLong = mysem.serialize();
+        Handle one = mem.insert(tLong, tLong.length, 1);
+
+        Seminar mysem2 = new Seminar(2, "Seminar", "2405231000", 75, (short)15,
+            (short)33, 125, longKeywords, "This");
+        byte[] tLong2 = mysem2.serialize();
+        Handle two = mem.insert(tLong2, tLong2.length, 2);
+
+        Seminar mysem3 = new Seminar(3, "Seminar", "2405231000", 75, (short)15,
+            (short)33, 125, longKeywords, "This");
+        byte[] tLong3 = mysem3.serialize();
+        Handle three = mem.insert(tLong3, tLong3.length, 3);
+
+        Seminar mysem4 = new Seminar(4, "Seminar", "2405231000", 75, (short)15,
+            (short)33, 125, longKeywords, "This");
+        byte[] tLong4 = mysem4.serialize();
+        Handle four = mem.insert(tLong4, tLong4.length, 4);
+
+        Seminar mysem5 = new Seminar(5, "Seminar", "2405231000", 75, (short)15,
+            (short)33, 125, longKeywords, "This");
+        byte[] tLong5 = mysem5.serialize();
+        Handle five = mem.insert(tLong5, tLong5.length, 5);
+
+        ByteArrayOutputStream outContent1 = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent1));
+        mem.dump();
+        String output1 = outContent1.toString();
+        assertTrue(output1.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+            + "1024: 3072 "));
+
+        mem.remove(three);
+        mem.remove(five);
+        ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent2));
+        mem.dump();
+        String output2 = outContent2.toString();
+        assertTrue(output2.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+            + "512: 1536 2560 \r\n" + "1024: 3072 \r\n"));
+
+        mem.remove(one);
+        mem.remove(two);
+        ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent3));
+        mem.dump();
+        String output3 = outContent3.toString();
+        assertTrue(output3.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+            + "1024: 1024 "));
+
+        mem.remove(four);
+        ByteArrayOutputStream outContent4 = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent4));
+        mem.dump();
+        String output4 = outContent4.toString();
+        assertTrue(output4.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+            + "512: 2048 \r\n" + "1024: 1024 "));
+    }
+
+
+    /**
      * tests the get length method
      */
     public void testGetMemLength() {
@@ -124,7 +197,7 @@ public class MemManagerTest extends student.TestCase {
     public void testDump() {
 
         mem.dump();
-        
+
     }
 
 }

@@ -375,7 +375,7 @@ public class MemManager {
     /**
      * prints out all the freeBlocks and their start indicies
      */
-    void dump() {
+    public void dump() {
 
         System.out.println("Freeblock List:");
         Boolean used = false;
