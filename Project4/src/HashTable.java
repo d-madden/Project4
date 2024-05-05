@@ -17,7 +17,6 @@ public class HashTable {
     private int size; // size of array
     private int elements; // number of handles
     private Handle[] hash;
-    private static Handle emptyHandle;
 
     /**
      * hashtable constructor
@@ -29,12 +28,7 @@ public class HashTable {
 
         size = hashSize;
         hash = new Handle[size];
-        emptyHandle = new Handle(-1, 0, 0);
 
-        // populates the array with tombstones
-        for (int i = 0; i < size; i++) {
-            hash[i] = emptyHandle;
-        }
     }
 
 
@@ -54,7 +48,8 @@ public class HashTable {
         pos = id % size; // Initial position is the home slot
         home = id % size;
 
-        for (int i = 1; hash[pos] != emptyHandle; i++) {
+        for (int i = 1; hash[pos] != null || hash[pos] != Tombstone
+            .getInstance(); i++) {
             if (id == hash[pos].getId()) {
                 System.out.println("Duplicates not allowed");
                 return;
@@ -81,8 +76,8 @@ public class HashTable {
         int pos;
         pos = id % size; // Initial position is the home slot
         home = id % size;
-        for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != emptyHandle); i++) {
+        for (int i = 1; (id != (hash[pos]).getId()) && (hash[pos] != null
+            || hash[pos] != Tombstone.getInstance()); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
@@ -112,10 +107,10 @@ public class HashTable {
         int pos;
         pos = id % size; // Initial position is the home slot
         home = id % size;
-        Handle removed = emptyHandle;
+        Handle removed = Tombstone.getInstance();
 
-        for (int i = 1; (id != (hash[pos]).getId())
-            && (hash[pos] != emptyHandle); i++) {
+        for (int i = 1; (id != (hash[pos]).getId()) && (hash[pos] != null
+            || hash[pos] != Tombstone.getInstance()); i++) {
 
             pos = (home + p(id, i)) % size; // Next on probe
                                             // sequence
@@ -123,13 +118,13 @@ public class HashTable {
         if (id == (hash[pos]).getId()) { // Found it
 
             removed = hash[pos];
-            hash[pos] = emptyHandle;
+            hash[pos] = Tombstone.getInstance();
             elements--;
 
             return removed;
         }
         else {
-            return emptyHandle; // K not in hash table
+            return Tombstone.getInstance(); // K not in hash table
         }
     }
 
