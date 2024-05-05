@@ -40,9 +40,20 @@ public class SemManager {
 
         // is the initial size of the hash table
         int hashSize = Integer.parseInt(args[1]);
+        int i = 0;
+        while (hashSize > Math.pow(2, i)) {
+            i++;
+        }
 
-        CommandProcessor cmd = new CommandProcessor();
-        cmd.processor(memSize, hashSize, args[2]);
+        if (hashSize != Math.pow(2, i)) {
+            System.out.println("Hash Table size not a power of 2" + hashSize);
+        }
+        else {
+
+            CommandProcessor cmd = new CommandProcessor();
+
+            cmd.processor(memSize, hashSize, args[2]);
+        }
 
     }
 
