@@ -118,7 +118,7 @@ public class Database {
         mem = memNew;
         hash = hashNew;
 
-        System.out.print("Memory pool expanded to " + mem.getMemLength()
+        System.out.println("Memory pool expanded to " + mem.getMemLength()
             + " bytes");
     }
 
