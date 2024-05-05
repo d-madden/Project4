@@ -173,9 +173,23 @@ public class HashTableTest extends student.TestCase {
         h.hashInsert(d5);
         
         h.hashDelete(5);
+        Handle[] tab = h.getTable();
+        assertEquals(tab[5].getId(), -1);
+        
+        assertEquals(tab[3].getId(), 3);
         h.hashDelete(3);
+        tab = h.getTable();
+        assertEquals(tab[3].getId(), -1);
+        
+        assertEquals(tab[2].getId(), 2);
         h.hashDelete(2);
+        tab = h.getTable();
+        assertEquals(tab[2].getId(), -1);
+        
+        assertEquals(tab[1].getId(), 1);
         h.hashDelete(1);
+        tab = h.getTable();
+        assertEquals(tab[1].getId(), -1);
         
         h.dump();
         
@@ -188,6 +202,8 @@ public class HashTableTest extends student.TestCase {
             systemOut().getHistory());
         
         assertEquals(h.getSize(), 8);
+        
+        assertNull(h.hashDelete(1));
         
         Handle d6 = new Handle(6, 6, 6);
         Handle d7 = new Handle(7, 7, 7);
@@ -219,10 +235,66 @@ public class HashTableTest extends student.TestCase {
             systemOut().getHistory());
         
         assertEquals(h.getSize(), 16);
+        assertEquals(h.getElements(), 5);
         
+        h.hashInsert(d6);
+        
+        assertFuzzyEquals("Hashtable: \n"
+            + "1: TOMBSTONE\n"
+            + "2: TOMBSTONE\n"
+            + "3: TOMBSTONE\n"
+            + "5: TOMBSTONE\n"
+            + "total records: 0\n"
+            + "Hash table expanded to 16 records\n"
+            + "Hashtable: \n"
+            + "1: 1\n"
+            + "2: 9\n"
+            + "6: 6\n"
+            + "7: 7\n"
+            + "8: 8\n"
+            + "total records: 5\n"
+            + "Duplicates not allowed",
+            systemOut().getHistory());
         
         
     }
+    
+    public void testRemaining() {
+        
+        assertNull(h.hashDelete(1));
+        
+        Handle d6 = new Handle(6, 6, 6);
+        Handle d7 = new Handle(7, 7, 7);
+        Handle d8 = new Handle(8, 8, 8);
+        Handle d9 = new Handle(9, 9, 9);
+        
+        h.hashInsert(d);
+        h.hashInsert(d6);
+        h.hashInsert(d7);
+        h.hashInsert(d8);
+        h.hashInsert(d9);
+        
+        assertFuzzyEquals("Hash table expanded to 16 records",
+            systemOut().getHistory());
+        
+        System.out.println(h.p(6, 2));
+        System.out.println(h.p(2, 6));
+        System.out.println(h.p(1, 8));
+        System.out.println(h.p(0, 7));
+        System.out.println(h.p(8, 1));
+        System.out.println(h.p(7, 0));
+        
+        assertFuzzyEquals("Hash table expanded to 16 records\n"
+            + "2\n"
+            + "6\n"
+            + "8\n"
+            + "7\n"
+            + "1\n"
+            + "0",
+            systemOut().getHistory());
+    }
+    
+    
     
     
 

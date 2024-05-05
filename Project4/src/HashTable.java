@@ -234,7 +234,13 @@ public class HashTable {
     }
 
 
-    private int p(int k, int i) {
+    /**
+     * mod formula for traversal
+     * 
+     * @return answer
+     * answer to mod formula for given point
+     */
+    public int p(int k, int i) {
 
         return i * ((((k / size) % (size / 2)) * 2) + 1);
     }
