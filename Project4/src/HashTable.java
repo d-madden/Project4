@@ -21,7 +21,9 @@ public class HashTable {
 
     /**
      * hashtable constructor
+     * 
      * @param hashSize
+     *            size of the hash table
      */
     public HashTable(int hashSize) {
 
@@ -38,7 +40,9 @@ public class HashTable {
 
     /**
      * inserts into hashtable
+     * 
      * @param e
+     *            the handle we are inserting
      */
     public void hashInsert(Handle e) {
 
@@ -46,7 +50,7 @@ public class HashTable {
 
         int home; // Home position for e
         int pos;
-        
+
         pos = id % size; // Initial position is the home slot
         home = id % size;
 
@@ -65,8 +69,9 @@ public class HashTable {
 
     /**
      * searches hashtable
+     * 
      * @param id
-     *          identification
+     *            identification
      * @return boolean
      */
     public Handle hashSearch(int id) {
@@ -96,8 +101,9 @@ public class HashTable {
 
     /**
      * deletes hashtable
+     * 
      * @param id
-     *          id imagine this is the id of element to delete
+     *            id imagine this is the id of element to delete
      * @return removed handle
      */
     public Handle hashDelete(int id) {
@@ -182,6 +188,7 @@ public class HashTable {
         return elements;
     }
 
+
     /**
      * 
      * @return
@@ -191,6 +198,7 @@ public class HashTable {
         return (elements > size / 2);
 
     }
+
 
     private int p(int k, int i) {
 

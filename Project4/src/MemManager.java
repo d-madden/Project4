@@ -254,14 +254,26 @@ public class MemManager {
             System.out.println("There are no freeblocks in the memory pool");
         }
     }
-    
+
+
+    /**
+     * 
+     * @return
+     *         returns the memory block array
+     */
     public byte[] getMem() {
-        
+
         return mem;
     }
-    
+
+
+    /**
+     * 
+     * @return
+     *         returns the freeblock array
+     */
     public FreeBlock[] getFree() {
-        
+
         return freeBlock;
     }
 }
