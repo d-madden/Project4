@@ -13,8 +13,8 @@ public class Tombstone extends Handle {
      * constructor for tombstone
      */
     public Tombstone() {
+        
         super(-1, 0, 0);
-        // TODO Auto-generated constructor stub
     }
 
 
@@ -28,6 +28,7 @@ public class Tombstone extends Handle {
     public static Tombstone getInstance() {
 
         if (tomb == null) {
+            
             tomb = new Tombstone();
         }
 
