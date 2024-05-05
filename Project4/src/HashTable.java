@@ -180,6 +180,7 @@ public class HashTable {
 
         this.size = size * 2;
         this.hash = new Handle[size];
+        this.elements = 0;
 
         for (int i = 0; i < oldSize; i++) {
 

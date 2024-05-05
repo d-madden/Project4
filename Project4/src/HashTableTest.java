@@ -113,12 +113,46 @@ public class HashTableTest extends student.TestCase {
         h.hashInsert(d2);
         h.hashInsert(d3);
         h.hashInsert(d4);
+        
         h.hashDelete(4);
+        
+        h.dump();
+        
+        assertFuzzyEquals("Hashtable: \n"
+            + "1: 1\n"
+            + "2: 2\n"
+            + "3: 3\n"
+            + "4: TOMBSTONE\n"
+            + "total records: 3", 
+            systemOut().getHistory());
         
         h.hashInsert(d5);
         h.hashInsert(d4);
         
         assertEquals(h.getSize(), 16);
+        
+        h.dump();
+        
+        assertFuzzyEquals("Hashtable: \n"
+            + "1: 1\n"
+            + "2: 2\n"
+            + "3: 3\n"
+            + "4: TOMBSTONE\n"
+            + "total records: 3\n"
+            + "Hash table expanded to 16 records\n"
+            + "Hashtable: \n"
+            + "1: 1\n"
+            + "2: 2\n"
+            + "3: 3\n"
+            + "4: 4\n"
+            + "5: 5\n"
+            + "total records: 5", 
+            systemOut().getHistory());
+        
+        
+        
+        
+        
     }
     
     
