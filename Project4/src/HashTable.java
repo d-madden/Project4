@@ -237,9 +237,11 @@ public class HashTable {
      * mod formula for traversal
      * 
      * @param k
+     *      id of location
      * @param i
+     *      loop variable
      * @return answer
-     * answer to mod formula for given point
+     *      answer to mod formula for given point
      */
     public int p(int k, int i) {
 

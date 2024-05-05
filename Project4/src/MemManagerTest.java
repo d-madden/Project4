@@ -89,12 +89,12 @@ public class MemManagerTest extends student.TestCase {
         mem.remove(smallH);
 
         String[] longKeywords = { "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good" };
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good" };
         Seminar longMysem = new Seminar(1729, "Seminar", "2405231000", 75,
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();
@@ -116,12 +116,12 @@ public class MemManagerTest extends student.TestCase {
      */
     public void testEverything() throws Exception {
         String[] longKeywords = { "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-            + "Good, Good, Good, Good" };
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+                + "Good, Good, Good, Good" };
         Seminar mysem = new Seminar(1, "Seminar", "2405231000", 75, (short)15,
             (short)33, 125, longKeywords, "This");
         byte[] tLong = mysem.serialize();
