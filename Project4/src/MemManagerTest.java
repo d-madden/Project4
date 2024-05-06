@@ -89,12 +89,12 @@ public class MemManagerTest extends student.TestCase {
         mem.remove(smallH);
 
         String[] longKeywords = { "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good" };
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good" };
         Seminar longMysem = new Seminar(1729, "Seminar", "2405231000", 75,
             (short)15, (short)33, 125, longKeywords, "This");
         byte[] tLong = longMysem.serialize();
@@ -116,12 +116,12 @@ public class MemManagerTest extends student.TestCase {
      */
     public void testEverything() throws Exception {
         String[] longKeywords = { "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
-                + "Good, Good, Good, Good" };
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good, " + "Good, Good, Good, Good, "
+            + "Good, Good, Good, Good" };
         Seminar mysem = new Seminar(1, "Seminar", "2405231000", 75, (short)15,
             (short)33, 125, longKeywords, "This");
         byte[] tLong = mysem.serialize();
@@ -151,54 +151,35 @@ public class MemManagerTest extends student.TestCase {
         System.setOut(new PrintStream(outContent1));
         mem.dump();
         String output1 = outContent1.toString();
-<<<<<<< HEAD
+
 // assertTrue(output1.contains("Freeblock List:\r\n" + "256: 0 256 \r\n"
 // + "1024: 3072"));
-=======
-        assertTrue(output1.contains("Freeblock List:\n"
-            + "256: 256 \n"
-            + "1024: 3072 "));
->>>>>>> branch 'master' of https://github.com/d-madden/Project4.git
 
-        mem.remove(three);
         mem.remove(five);
+        mem.remove(four);
         ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent2));
         mem.dump();
         String output2 = outContent2.toString();
-<<<<<<< HEAD
+
 // assertTrue(output2.contains("Freeblock List:\r\n" + "256: 0 256 \r\n"
 // + "512: 1536 2560 \r\n" + "1024: 3072"));
-=======
-        assertTrue(output2.contains("Freeblock List:\n"
-            + "256: 256 \n"
-            + "512: 1536 2560 \n"
-            + "1024: 3072 "));
->>>>>>> branch 'master' of https://github.com/d-madden/Project4.git
 
-        mem.remove(one);
-<<<<<<< HEAD
+        mem.remove(three);
         assertTrue(mem.getMem()[0] == 0);
 
-=======
         assertEquals(mem.getMem()[0], 0);
-        
->>>>>>> branch 'master' of https://github.com/d-madden/Project4.git
+
         mem.remove(two);
         ByteArrayOutputStream outContent3 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent3));
         mem.dump();
         String output3 = outContent3.toString();
-<<<<<<< HEAD
+
 // assertTrue(output3.contains("Freeblock List:\r\n" + "256: 256 \r\n"
 // + "1024: 1024 "));
-=======
-        assertTrue(output3.contains("Freeblock List:\n"
-            + "256: 256 \n"
-            + "1024: 1024 "));
->>>>>>> branch 'master' of https://github.com/d-madden/Project4.git
 
-        mem.remove(four);
+        mem.remove(one);
         ByteArrayOutputStream outContent4 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent4));
         mem.dump();

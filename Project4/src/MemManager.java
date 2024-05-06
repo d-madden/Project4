@@ -339,10 +339,13 @@ public class MemManager {
                 }
             }
 
-            FreeBlock temp2 = this.buddy(block + 1, handStart);
+            FreeBlock temp2 = this.buddy(block + 1, min);
             if (temp2 != null) {
                 compress(block + 1, Math.min(handStart, temp2.getBegIndex()),
                     temp2);
+            }
+            else {
+                this.addToEnd(block + 1, min);
             }
 
         }
