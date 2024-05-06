@@ -341,7 +341,7 @@ public class MemManager {
 
             FreeBlock temp2 = this.buddy(block + 1, min);
             if (temp2 != null) {
-                compress(block + 1, Math.min(handStart, temp2.getBegIndex()),
+                compress(block + 1, Math.min(min, temp2.getBegIndex()),
                     temp2);
             }
             else {
