@@ -25,14 +25,14 @@ public class DatabaseTest extends student.TestCase {
      */
     public void testResize() throws Exception {
         String[] longKeywords = { "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, "
-            + "Good, Good, Good, Good, Good, " + "Good, Good, Good" };
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, "
+                + "Good, Good, Good, Good, Good, " + "Good, Good, Good" };
 
         String[] shortKeywords = { "hello, Time, ONE" };
 
@@ -59,7 +59,8 @@ public class DatabaseTest extends student.TestCase {
         assertFuzzyEquals("Successfully inserted record with ID 1\n"
             + "ID: 1, Title: Overview of HCI Research at VT\n"
             + "Date: 0610051600, Length: 90, X: 10, Y: 10, Cost: 45\n"
-            + "Description: This seminar will present an overview of HCI research at VT\n"
+            + "Description: This seminar will present an overview of "
+            + "HCI research at VT\n"
             + "Keywords: HCI, Computer_Science, VT, Virginia_Tech\n"
             + "Size: 173\n" + "Memory pool expanded to 512 bytes\n"
             + "Successfully inserted record with ID 2\n"

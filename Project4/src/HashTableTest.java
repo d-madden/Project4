@@ -259,6 +259,9 @@ public class HashTableTest extends student.TestCase {
         
     }
     
+    /**
+     * tests everything else if it can
+     */
     public void testRemaining() {
         
         assertNull(h.hashDelete(1));
