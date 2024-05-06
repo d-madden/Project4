@@ -155,6 +155,11 @@ public class MemManagerTest extends student.TestCase {
 // assertTrue(output1.contains("Freeblock List:\r\n" + "256: 0 256 \r\n"
 // + "1024: 3072"));
 
+        // assertTrue(output1.contains("Freeblock List:\r\n" + "256: 0 256 \r\n"
+        // + "1024: 3072"));
+        assertTrue(output1.contains("Freeblock List:\n" + "512: 2560 \n"
+            + "1024: 3072 "));
+
         mem.remove(five);
         mem.remove(four);
         ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();
@@ -165,8 +170,16 @@ public class MemManagerTest extends student.TestCase {
 // assertTrue(output2.contains("Freeblock List:\r\n" + "256: 0 256 \r\n"
 // + "512: 1536 2560 \r\n" + "1024: 3072"));
 
+        // assertTrue(output2.contains("Freeblock List:\r\n" + "256: 0 256 \r\n"
+        // + "512: 1536 2560 \r\n" + "1024: 3072"));
+        assertTrue(output2.contains("Freeblock List:\n" + "512: 1024 \n"
+            + "2048: 2048 "));
+
         mem.remove(three);
         assertTrue(mem.getMem()[0] == 0);
+
+        mem.remove(one);
+        assertEquals(mem.getMem()[0], 0);
 
         assertEquals(mem.getMem()[0], 0);
 
@@ -179,13 +192,18 @@ public class MemManagerTest extends student.TestCase {
 // assertTrue(output3.contains("Freeblock List:\r\n" + "256: 256 \r\n"
 // + "1024: 1024 "));
 
+        // assertTrue(output3.contains("Freeblock List:\r\n" + "256: 256 \r\n"
+        // + "1024: 1024 "));
+        assertTrue(output3.contains("Freeblock List:\n" + "1024: 512 \n"
+            + "2048: 2048 "));
+
         mem.remove(one);
         ByteArrayOutputStream outContent4 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent4));
         mem.dump();
         String output4 = outContent4.toString();
-        assertTrue(output4.contains("Freeblock List:\n" + "256: 256 \n"
-            + "512: 2048 \n" + "1024: 1024 "));
+        assertTrue(output4.contains("Freeblock List:\n" + "512: 1536 \n"
+            + "1024: 512 \n" + "2048: 2048 "));
     }
 
 

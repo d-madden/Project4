@@ -172,8 +172,15 @@ public class HashTableTest extends student.TestCase {
         h.hashInsert(d3);
         h.hashInsert(d5);
         
-        h.hashDelete(5);
         Handle[] tab = h.getTable();
+        assertEquals(tab[5].getId(), 5);
+        assertEquals(tab[3].getId(), 3);
+        assertEquals(tab[2].getId(), 2);
+        assertEquals(tab[1].getId(), 1);
+        
+        
+        h.hashDelete(5);
+        tab = h.getTable();
         assertEquals(tab[5].getId(), -1);
         
         assertEquals(tab[3].getId(), 3);
@@ -277,27 +284,105 @@ public class HashTableTest extends student.TestCase {
         h.hashInsert(d8);
         h.hashInsert(d9);
         
+        assertNotNull(h.hashSearch(1));
+        assertNotNull(h.hashSearch(6));
+        assertNull(h.hashSearch(9));
+        
         assertFuzzyEquals("Hash table expanded to 16 records",
             systemOut().getHistory());
         
-        System.out.println(h.p(6, 2));
-        System.out.println(h.p(2, 6));
-        System.out.println(h.p(1, 8));
-        System.out.println(h.p(0, 7));
-        System.out.println(h.p(8, 1));
-        System.out.println(h.p(7, 0));
+        assertEquals(h.p(6, 2), 2);
+        assertEquals(h.p(2, 6), 6);
+        assertEquals(h.p(1, 8), 8);
+        assertEquals(h.p(0, 7), 7);
+        assertEquals(h.p(8, 1), 1);
+        assertEquals(h.p(7, 0), 0);
+        assertEquals(h.p(55, 55), 385);
+        assertEquals(h.p(66, 66), 594);
+        assertEquals(h.p(44, 44), 220);
+        assertEquals(h.p(100, 0), 0);
+        assertEquals(h.p(0, 200), 200);
+        assertEquals(h.p(1000, 1000), 13000);
         
-        assertFuzzyEquals("Hash table expanded to 16 records\n"
-            + "2\n"
-            + "6\n"
-            + "8\n"
-            + "7\n"
-            + "1\n"
-            + "0",
-            systemOut().getHistory());
+        
     }
     
-    
+    /**
+     * tests everything else if it can
+     */
+    public void testEvenMoreStuff() {
+        
+        Handle z1 = new Handle(1, 1, 1);
+        Handle z2 = new Handle(2, 2, 2);
+        Handle z3 = new Handle(3, 3, 3);
+        Handle z4 = new Handle(4, 4, 4);
+        Handle z5 = new Handle(50, 50, 50);
+        Handle z6 = new Handle(60, 60, 60);
+        Handle z7 = new Handle(70, 70, 70);
+        Handle z8 = new Handle(80, 80, 80);
+        Handle z9 = new Handle(90, 90, 90);
+        Handle z10 = new Handle(1000, 10, 10);
+        Handle z11 = new Handle(11, 1100, 11);
+        Handle z12 = new Handle(12, 12, 1200);
+        Handle z13 = new Handle(1300, 1300, 13);
+        Handle z14 = new Handle(14, 1400, 1400);
+        Handle z15 = new Handle(1500, 1500, 1500);
+        
+        
+        h.hashInsert(z1);
+        h.hashInsert(z2);
+        h.hashInsert(z3);
+        h.hashInsert(z4);
+        h.hashInsert(z5);
+        h.hashInsert(z6);
+        h.hashInsert(z7);
+        h.hashInsert(z8);
+        h.hashInsert(z9);
+        h.hashInsert(z10);
+        h.hashInsert(z11);
+        h.hashInsert(z12);
+        h.hashInsert(z13);
+        h.hashInsert(z14);
+        h.hashInsert(z15);
+        
+        h.dump();
+        
+        assertFuzzyEquals("Hash table expanded to 16 records\n"
+            + "Hash table expanded to 32 records\n"
+            + "Hashtable: \n"
+            + "1: 1\n"
+            + "2: 2\n"
+            + "3: 3\n"
+            + "4: 4\n"
+            + "6: 70\n"
+            + "8: 1000\n"
+            + "10: 90\n"
+            + "11: 11\n"
+            + "12: 12\n"
+            + "14: 14\n"
+            + "16: 80\n"
+            + "18: 50\n"
+            + "20: 1300\n"
+            + "25: 1500\n"
+            + "28: 60\n"
+            + "total records: 15",
+            systemOut().getHistory());
+        
+        assertEquals(h.hashDelete(60), z6);
+        assertEquals(h.hashDelete(1500), z15);
+        assertEquals(h.hashDelete(1000), z10);
+        assertEquals(h.hashDelete(1), z1);
+        assertEquals(h.hashDelete(12), z12);
+        
+        assertNull(h.hashDelete(60));
+        assertNull(h.hashDelete(1500));
+        assertNull(h.hashDelete(1000));
+        assertNull(h.hashDelete(1));
+        assertNull(h.hashDelete(12));
+        
+        
+        
+    }
     
     
 
