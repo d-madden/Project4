@@ -12,7 +12,8 @@ public class TombstoneTest extends student.TestCase {
      */
     public void testSingletonBehavior() {
         // Reset the singleton instance for a clean start
-
+        assertEquals(Tombstone.getInstance().getId(), -1);
+        
         // Test the creation of the instance.
         Tombstone firstInstance = Tombstone.getInstance();
         assertNotNull("The first instance should not be null", firstInstance);

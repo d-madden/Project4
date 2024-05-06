@@ -37,6 +37,8 @@ public class HashTableTest extends student.TestCase {
      */
     public void testInsert() throws Exception {
         
+        assertNull(h.hashSearch(3));
+        
         assertEquals(h.getSize(), 8);
         assertEquals(h.getElements(), 0);
         
@@ -58,6 +60,8 @@ public class HashTableTest extends student.TestCase {
         
         assertEquals(h.getSize(), 8);
         assertEquals(h.getElements(), 4);
+        
+        assertNull(h.hashSearch(20));
         
         Handle[] table = h.getTable();
         
