@@ -291,13 +291,15 @@ public class MemManager {
      *         returns boolean
      */
     private boolean adjacent(int begIndex, int start, int size) {
+        int side = start / size;
+        side = side % 2;
 
-        if (start < begIndex) {
+        if (side == 0) {
             if (start + size == begIndex) {
                 return true;
             }
         }
-        else if (begIndex < start) {
+        else {
             if (begIndex + size == start) {
                 return true;
             }
@@ -320,7 +322,8 @@ public class MemManager {
 
         if (freeBlock[block + 1].getNext() == null) {
             freeBlock[block + 1].setNext(new FreeBlock(handStart));
-            freeBlock[block].setNext(null);
+            skip(freeBlock[block], temp);
+
         }
         else {
             int min = Math.min(handStart, temp.getBegIndex());
@@ -341,12 +344,35 @@ public class MemManager {
 
             FreeBlock temp2 = this.buddy(block + 1, min);
             if (temp2 != null) {
-                compress(block + 1, Math.min(min, temp2.getBegIndex()),
-                    temp2);
+                compress(block + 1, Math.min(min, temp2.getBegIndex()), temp2);
             }
             else {
                 this.addToEnd(block + 1, min);
             }
+
+        }
+
+    }
+
+
+    /**
+     * 
+     * @param freeBlock2
+     *            takes a block we are in
+     * @param temp
+     *            the variable we are trying to skip
+     */
+    private void skip(FreeBlock freeBlock2, FreeBlock temp) {
+        FreeBlock prev = freeBlock2;
+        FreeBlock curr = freeBlock2.getNext();
+
+        while (curr != null) {
+            if (curr == temp) {
+                prev.setNext(temp.getNext());
+                return;
+            }
+            curr = curr.getNext();
+            prev = prev.getNext();
 
         }
 
