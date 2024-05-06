@@ -82,12 +82,18 @@ public class MemManager {
         for (int i = 0; i < freeBlock.length; i++) {
             memNew.freeBlock[i] = freeBlock[i];
         }
-        memNew.freeBlock[memNew.freeBlock.length - 1].setNext(null);
-        memNew.freeBlock[memNew.freeBlock.length - 2].setNext(new FreeBlock(
-            memNew.freeBlock[memNew.freeBlock.length - 2].getBegIndex()));
 
         mem = memNew.mem;
         freeBlock = memNew.freeBlock;
+        freeBlock[memNew.freeBlock.length - 1].setNext(null);
+        if (freeBlock[memNew.freeBlock.length - 2].getNext() != null) {
+            this.compress(memNew.freeBlock.length - 2,
+                freeBlock[memNew.freeBlock.length - 2].getNext().getBegIndex(),
+                new FreeBlock(getMemLength() / 2));
+        }
+        else {
+            this.addToEnd(memNew.freeBlock.length - 2, getMemLength() / 2);
+        }
 
         System.out.println("Memory pool expanded to " + mem.length + " bytes");
 
@@ -227,7 +233,7 @@ public class MemManager {
             if (handStart < curr.getBegIndex()) {
                 FreeBlock nBlock = new FreeBlock(handStart);
                 nBlock.setNext(curr);
-                prev.setNext(new FreeBlock(handStart));
+                prev.setNext(nBlock);
                 return;
             }
             else {
@@ -333,12 +339,12 @@ public class MemManager {
                 }
             }
 
-            freeBlock[block + 1].setNext(new FreeBlock(handStart));
-            FreeBlock temp2 = this.buddy(block, handStart);
-            while (temp2 != null) {
-                compress(block, handStart, temp2);
-                temp2 = this.buddy(block + 1, handStart);
+            FreeBlock temp2 = this.buddy(block + 1, handStart);
+            if (temp2 != null) {
+                compress(block + 1, Math.min(handStart, temp2.getBegIndex()),
+                    temp2);
             }
+
         }
 
     }
